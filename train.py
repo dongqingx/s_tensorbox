@@ -461,7 +461,7 @@ def train(H, test_images):
             [grid_size, H['rnn_len'], H['num_classes']],
             [grid_size, H['rnn_len'], 4],
             )
-        q[phase] = tf.FIFOQueue(capacity=30, dtypes=dtypes, shapes=shapes)
+        q[phase] = tf.FIFOQueue(capacity=100, dtypes=dtypes, shapes=shapes)
         enqueue_op[phase] = q[phase].enqueue((x_in, p_x_in, pp_x_in, f_x_in, confs_in, boxes_in))
 
     def make_feed(d):
