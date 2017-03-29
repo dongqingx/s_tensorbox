@@ -126,9 +126,23 @@ def build_forward(H, x, p_x, pp_x, f_x, phase, reuse):
     pp_x -= input_mean
     f_x -= input_mean
     cnn, early_feat = googlenet_load.model(x, H, reuse)
+    w = tf.Variable(tf.random_normal([1,1,1,1]))
+    cnn = tf.nn.conv2d(cnn, w, strides=[1, 1, 1, 1], padding='SAME')
+
     p_cnn, p_early_feat = googlenet_load.model(p_x, H, reuse)
+    p_w = tf.Variable(tf.random_normal([1,1,1,1]))
+    p_cnn = tf.nn.conv2d(p_cnn, p_w, strides=[1, 1, 1, 1], padding='SAME')
+
     pp_cnn, pp_early_feat = googlenet_load.model(pp_x, H, reuse)
+    pp_w = tf.Variable(tf.random_normal([1,1,1,1]))
+    pp_cnn = tf.nn.conv2d(pp_cnn, pp_w, strides=[1, 1, 1, 1], padding='SAME')
+    
     f_cnn, f_early_feat = googlenet_load.model(f_x, H, reuse)
+    f_w = tf.Variable(tf.random_normal([1,1,1,1]))
+    f_cnn = tf.nn.conv2d(f_cnn, f_w, strides=[1, 1, 1, 1], padding='SAME')
+
+    cnn = cnn + p_cnn + pp_cnn
+
     early_feat_channels = H['early_feat_channels']
     early_feat = early_feat[:, :, :, :early_feat_channels]
     
