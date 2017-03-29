@@ -45,17 +45,38 @@ def load_idl_tf(idlfile, H, jitter):
             file_name = anno.imageName.split('/')[-1]
             (shotname, extension) = os.path.splitext(file_name)
             p_image_path = dir_path + "/" + (str(int(shotname) - 1)).zfill(4) + ".png"
-            p_image_path = dir_path + "/" + (str(int(shotname) - 2)).zfill(4) + ".png"
+            pp_image_path = dir_path + "/" + (str(int(shotname) - 2)).zfill(4) + ".png"
             f_image_path = dir_path + "/" + (str(int(shotname) + 1)).zfill(4) + ".png"
+            if not os.path.exists(p_image_path):
+                print "File not exists: %s" % p_image_path
+                exit()
+            if not os.path.exists(pp_image_path):
+                print "File not exists: %s" % pp_image_path
+                exit()
+            if not os.path.exists(f_image_path):
+                print "File not exists: %s" % f_image_path
+                exit()
+
+            p_I = imread(p_image_path)
+            pp_I = imread(pp_image_path)
+            f_I = imread(f_image_path) 
 	    #Skip Greyscale images
             if len(I.shape) < 3:
                 continue	    
             if I.shape[2] == 4:
                 I = I[:, :, :3]
+                p_I = p_I[:, :, :3]
+                pp_I = pp_I[:, :, :3]
+                f_I = f_I[:, :, :3]
+
             if I.shape[0] != H["image_height"] or I.shape[1] != H["image_width"]:
                 if epoch == 0:
                     anno = rescale_boxes(I.shape, anno, H["image_height"], H["image_width"])
                 I = imresize(I, (H["image_height"], H["image_width"]), interp='cubic')
+                p_I = imresize(p_I, (H["image_height"], H["image_width"]), interp='cubic')
+                pp_I = imresize(pp_I, (H["image_height"], H["image_width"]), interp='cubic')
+                f_I = imresize(f_I, (H["image_height"], H["image_width"]), interp='cubic')
+
             if jitter:
                 jitter_scale_min=0.9
                 jitter_scale_max=1.1
@@ -73,7 +94,7 @@ def load_idl_tf(idlfile, H, jitter):
                                             H["grid_height"],
                                             H["rnn_len"])
 
-            yield {"image": I, "boxes": boxes, "flags": flags}
+            yield {"image": I, "boxes": boxes, "flags": flags, "p_image": p_I, "pp_image": pp_I, "f_image": f_I}
 
 def make_sparse(n, d):
     v = np.zeros((d,), dtype=np.float32)
@@ -95,6 +116,9 @@ def load_data_gen(H, phase, jitter):
         assert(boxes.shape == (grid_size, rnn_len, 4))
 
         output['image'] = d['image']
+        output['p_image'] = d['p_image']
+        output['pp_image'] = d['pp_image']
+        output['f_image'] = d['f_image']
         output['confs'] = np.array([[make_sparse(int(detection), d=H['num_classes']) for detection in cell] for cell in flags])
         output['boxes'] = boxes
         output['flags'] = flags
