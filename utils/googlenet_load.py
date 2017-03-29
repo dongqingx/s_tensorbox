@@ -1,4 +1,7 @@
 from slim_nets import inception_v1 as inception
+from slim_nets import p_inception_v1 as p_inception
+from slim_nets import pp_inception_v1 as pp_inception
+from slim_nets import f_inception_v1 as f_inception
 from slim_nets import resnet_v1 as resnet
 import tensorflow.contrib.slim as slim
 
@@ -36,7 +39,7 @@ def p_model(x, H, reuse, is_training=True):
                                         reuse=reuse)
     elif H['slim_basename'] == 'InceptionV1':
         with slim.arg_scope(inception.inception_v1_arg_scope()):
-            _, T = inception.inception_v1(x,
+            _, T = p_inception.inception_v1(x,
                                           is_training=is_training,
                                           num_classes=1001,
                                           spatial_squeeze=False,
@@ -61,7 +64,7 @@ def pp_model(x, H, reuse, is_training=True):
                                         reuse=reuse)
     elif H['slim_basename'] == 'InceptionV1':
         with slim.arg_scope(inception.inception_v1_arg_scope()):
-            _, T = inception.inception_v1(x,
+            _, T = pp_inception.inception_v1(x,
                                           is_training=is_training,
                                           num_classes=1001,
                                           spatial_squeeze=False,
@@ -86,7 +89,7 @@ def f_model(x, H, reuse, is_training=True):
                                         reuse=reuse)
     elif H['slim_basename'] == 'InceptionV1':
         with slim.arg_scope(inception.inception_v1_arg_scope()):
-            _, T = inception.inception_v1(x,
+            _, T = f_inception.inception_v1(x,
                                           is_training=is_training,
                                           num_classes=1001,
                                           spatial_squeeze=False,
