@@ -225,6 +225,8 @@ def inception_v1_base(inputs,
         if final_endpoint == end_point: return net, end_points
 
         end_point = 'Mixed_5c'
+        # print net.get_shape()
+        # print "net shape"
         with tf.variable_scope(end_point):
           with tf.variable_scope('Branch_0'):
             branch_0 = slim.conv2d(net, 384, [1, 1], scope='Conv2d_0a_1x1')

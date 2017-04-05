@@ -21,8 +21,16 @@ def get_image_dir(args):
 def get_results(args, H):
     tf.reset_default_graph()
     x_in = tf.placeholder(tf.float32, name='x_in', shape=[H['image_height'], H['image_width'], 3])
+    p_x_in = tf.placeholder(tf.float32, name='p_x_in', shape=[H['image_height'], H['image_width'], 3])
+    pp_x_in = tf.placeholder(tf.float32, name='pp_x_in', shape=[H['image_height'], H['image_width'], 3])
+    f_x_in = tf.placeholder(tf.float32, name='f_x_in', shape=[H['image_height'], H['image_width'], 3])
+
     if H['use_rezoom']:
-        pred_boxes, pred_logits, pred_confidences, pred_confs_deltas, pred_boxes_deltas = build_forward(H, tf.expand_dims(x_in, 0), 'test', reuse=None)
+        pred_boxes, pred_logits, pred_confidences, pred_confs_deltas, pred_boxes_deltas = build_forward(H, tf.expand_dims(x_in, 0), 
+                                                                                                           tf.expand_dims(p_x_in, 0), 
+                                                                                                           tf.expand_dims(pp_x_in, 0),
+                                                                                                           tf.expand_dims(f_x_in, 0),
+                                                                                                           'test', reuse=None)
         grid_area = H['grid_height'] * H['grid_width']
         pred_confidences = tf.reshape(tf.nn.softmax(tf.reshape(pred_confs_deltas, [grid_area * H['rnn_len'], 2])), [grid_area, H['rnn_len'], 2])
         if H['reregress']:
@@ -43,8 +51,28 @@ def get_results(args, H):
         for i in range(len(true_annolist)):
             true_anno = true_annolist[i]
             orig_img = imread('%s/%s' % (data_dir, true_anno.imageName))[:,:,:3]
+            dir_path = os.path.dirname(true_anno.imageName)
+            file_name = true_anno.imageName.split('/')[-1]
+            (shotname, extension) = os.path.splitext(file_name)
+            p_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 1)).zfill(4) + ".png"
+            pp_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 2)).zfill(4) + ".png"
+            f_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) + 1)).zfill(4) + ".png"
+            if not os.path.exists(p_image_path):
+                print "File not exists: %s" % p_image_path
+                exit()
+            if not os.path.exists(pp_image_path):
+                print "File not exists: %s" % pp_image_path
+                exit()
+            if not os.path.exists(f_image_path):
+                print "File not exists: %s" % f_image_path
+                exit()
+
+            p_img = imread(p_image_path)
+            pp_img = imread(pp_image_path)
+            f_img = imread(f_image_path)
+
             img = imresize(orig_img, (H["image_height"], H["image_width"]), interp='cubic')
-            feed = {x_in: img}
+            feed = {x_in: img, p_x_in: p_img, pp_x_in: pp_img, f_x_in: f_img}
             (np_pred_boxes, np_pred_confidences) = sess.run([pred_boxes, pred_confidences], feed_dict=feed)
             pred_anno = al.Annotation()
             pred_anno.imageName = true_anno.imageName
