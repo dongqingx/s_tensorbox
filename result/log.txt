@@ -7734,4 +7734,178 @@ Step: 385600, lr: 0.000002, Train Loss: 0.10, Softmax Test Accuracy: 95.3%, Time
 Step: 385650, lr: 0.000002, Train Loss: 0.11, Softmax Test Accuracy: 93.7%, Time/image (ms): 207.9
 Step: 385700, lr: 0.000002, Train Loss: 0.10, Softmax Test Accuracy: 96.7%, Time/image (ms): 201.1
 Step: 385750, lr: 0.000002, Train Loss: 0.11, Softmax Test Accuracy: 99.3%, Time/image (ms): 204.6
-Step: 385800, lr: 0.000002, Train Loss: 0.15, Softmax Test 
+Step: 385800, lr: 0.000002, Train Loss: 0.15, Softmax Test Accuracy: 95.7%, Time/image (ms): 205.1
+Step: 385850, lr: 0.000002, Train Loss: 0.14, Softmax Test Accuracy: 96.7%, Time/image (ms): 203.3
+Step: 385900, lr: 0.000002, Train Loss: 0.10, Softmax Test Accuracy: 97.7%, Time/image (ms): 202.2
+Step: 385950, lr: 0.000002, Train Loss: 0.07, Softmax Test Accuracy: 98.0%, Time/image (ms): 199.6
+Step: 386000, lr: 0.000002, Train Loss: 0.15, Softmax Test Accuracy: 97.3%, Time/image (ms): 205.4
+Step: 386050, lr: 0.000002, Train Loss: 0.10, Softmax Test Accuracy: 97.0%, Time/image (ms): 203.3
+Step: 386100, lr: 0.000002, Train Loss: 0.06, Softmax Test Accuracy: 97.7%, Time/image (ms): 201.6
+Step: 386150, lr: 0.000002, Train Loss: 0.11, Softmax Test Accuracy: 95.0%, Time/image (ms): 203.3
+Step: 386200, lr: 0.000002, Train Loss: 0.09, Softmax Test Accuracy: 98.7%, Time/image (ms): 205.0
+Step: 386250, lr: 0.000002, Train Loss: 0.09, Softmax Test Accuracy: 97.7%, Time/image (ms): 200.8
+Step: 386300, lr: 0.000002, Train Loss: 0.06, Softmax Test Accuracy: 92.3%, Time/image (ms): 202.7
+Step: 386350, lr: 0.000002, Train Loss: 0.11, Softmax Test Accuracy: 98.3%, Time/image (ms): 201.8
+Step: 386400, lr: 0.000002, Train Loss: 0.12, Softmax Test Accuracy: 97.3%, Time/image (ms): 200.7
+Step: 386450, lr: 0.000002, Train Loss: 0.07, Softmax Test Accuracy: 98.7%, Time/image (ms): 198.6
+Step: 386500, lr: 0.000002, Train Loss: 0.08, Softmax Test Accuracy: 96.0%, Time/image (ms): 198.5
+Step: 386550, lr: 0.000002, Train Loss: 0.13, Softmax Test Accuracy: 96.3%, Time/image (ms): 203.2
+Step: 386600, lr: 0.000002, Train Loss: 0.07, Softmax Test Accuracy: 96.0%, Time/image (ms): 201.1
+Step: 386650, lr: 0.000002, Train Loss: 0.17, Softmax Test Accuracy: 97.3%, Time/image (ms): 205.3
+Step: 386700, lr: 0.000002, Train Loss: 0.10, Softmax Test Accuracy: 96.0%, Time/image (ms): 204.2
+Step: 386750, lr: 0.000002, Train Loss: 0.14, Softmax Test Accuracy: 94.7%, Time/image (ms): 200.1
+Step: 386800, lr: 0.000002, Train Loss: 0.08, Softmax Test Accuracy: 98.3%, Time/image (ms): 204.2
+Step: 386850, lr: 0.000002, Train Loss: 0.09, Softmax Test Accuracy: 99.0%, Time/image (ms): 201.8
+Step: 386900, lr: 0.000002, Train Loss: 0.13, Softmax Test Accuracy: 98.7%, Time/image (ms): 204.4
+Step: 386950, lr: 0.000002, Train Loss: 0.11, Softmax Test Accuracy: 96.7%, Time/image (ms): 196.1
+Step: 387000, lr: 0.000002, Train Loss: 0.10, Softmax Test Accuracy: 97.0%, Time/image (ms): 202.0
+Step: 387050, lr: 0.000002, Train Loss: 0.10, Softmax Test Accuracy: 94.0%, Time/image (ms): 203.5
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/script_ops.py", line 83, in __call__
+    ret = func(*args)
+  File "link_train.py", line 437, in log_image
+    misc.imsave(img_path, merged)
+  File "/usr/lib/python2.7/dist-packages/scipy/misc/pilutil.py", line 163, in imsave
+    im.save(name)
+  File "/usr/lib/python2.7/dist-packages/PIL/Image.py", line 1462, in save
+    fp = builtins.open(fp, "wb")
+IOError: [Errno 2] No such file or directory: 'output/lstm_rezoom_2017_04_10_10.06/2_true.jpg'
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/script_ops.py", line 83, in __call__
+    ret = func(*args)
+  File "link_train.py", line 437, in log_image
+    misc.imsave(img_path, merged)
+  File "/usr/lib/python2.7/dist-packages/scipy/misc/pilutil.py", line 163, in imsave
+    im.save(name)
+  File "/usr/lib/python2.7/dist-packages/PIL/Image.py", line 1462, in save
+    fp = builtins.open(fp, "wb")
+IOError: [Errno 2] No such file or directory: 'output/lstm_rezoom_2017_04_10_10.06/2_pred.jpg'
+W tensorflow/core/framework/op_kernel.cc:968] Internal: Failed to run py callback pyfunc_0: see error log.
+W tensorflow/core/kernels/queue_base.cc:294] _0_fifo_queue: Skipping cancelled enqueue attempt with queue not closed
+Traceback (most recent call last):
+  File "link_train.py", line 596, in <module>
+    main()
+  File "link_train.py", line 593, in main
+    train(H, test_images=[])
+  File "link_train.py", line 554, in train
+    ], feed_dict=lr_feed)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 717, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 915, in _run
+    feed_dict_string, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 965, in _do_run
+    target_list, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 985, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors.InternalErrorException in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/usr/lib/python2.7/threading.py", line 763, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "link_train.py", line 495, in thread_loop
+    sess.run(enqueue_op[phase], feed_dict=make_feed(d))
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 717, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 915, in _run
+    feed_dict_string, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 965, in _do_run
+    target_list, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 985, in _do_call
+    raise type(e)(node_def, op, message)
+CancelledError: Session has been closed.
+
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/usr/lib/python2.7/threading.py", line 763, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "link_train.py", line 495, in thread_loop
+    sess.run(enqueue_op[phase], feed_dict=make_feed(d))
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 717, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 915, in _run
+    feed_dict_string, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 965, in _do_run
+    target_list, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 985, in _do_call
+    raise type(e)(node_def, op, message)
+CancelledError: Enqueue operation was cancelled
+	 [[Node: fifo_queue_enqueue = QueueEnqueue[Tcomponents=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_FLOAT], _class=["loc:@fifo_queue"], timeout_ms=-1, _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue, _recv_Placeholder_0, _recv_Placeholder_1_0, _recv_Placeholder_2_0, _recv_Placeholder_3_0, _recv_Placeholder_4_0, _recv_Placeholder_5_0)]]
+
+Caused by op u'fifo_queue_enqueue', defined at:
+  File "link_train.py", line 596, in <module>
+    main()
+  File "link_train.py", line 593, in main
+    train(H, test_images=[])
+  File "link_train.py", line 486, in train
+    enqueue_op[phase] = q[phase].enqueue((x_in, p_x_in, pp_x_in, f_x_in, confs_in, boxes_in))
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/data_flow_ops.py", line 329, in enqueue
+    return gen_data_flow_ops._queue_enqueue(self._queue_ref, vals, name=scope)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_data_flow_ops.py", line 982, in _queue_enqueue
+    name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/op_def_library.py", line 756, in apply_op
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 2380, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1298, in __init__
+    self._traceback = _extract_stack()
+
+CancelledError (see above for traceback): Enqueue operation was cancelled
+	 [[Node: fifo_queue_enqueue = QueueEnqueue[Tcomponents=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_FLOAT], _class=["loc:@fifo_queue"], timeout_ms=-1, _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue, _recv_Placeholder_0, _recv_Placeholder_1_0, _recv_Placeholder_2_0, _recv_Placeholder_3_0, _recv_Placeholder_4_0, _recv_Placeholder_5_0)]]
+
+
+: Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+	 [[Node: gradients/decoder_1/mul_5_grad/Shape_1/_607 = _HostRecv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/gpu:0", send_device="/job:localhost/replica:0/task:0/cpu:0", send_device_incarnation=1, tensor_name="edge_51527_gradients/decoder_1/mul_5_grad/Shape_1", tensor_type=DT_INT32, _device="/job:localhost/replica:0/task:0/gpu:0"]()]]
+
+Caused by op u'PyFunc_1', defined at:
+  File "link_train.py", line 596, in <module>
+    main()
+  File "link_train.py", line 593, in main
+    train(H, test_images=[])
+  File "link_train.py", line 498, in train
+    smooth_op, global_step, learning_rate) = build(H, q)
+  File "link_train.py", line 445, in build
+    [tf.float32])
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/script_ops.py", line 174, in py_func
+    input=inp, token=token, Tout=Tout, name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/gen_script_ops.py", line 39, in _py_func
+    name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/op_def_library.py", line 749, in apply_op
+    op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 2380, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1298, in __init__
+    self._traceback = _extract_stack()
+
+InternalError (see above for traceback): Failed to run py callback pyfunc_1: see error log.
+	 [[Node: PyFunc_1 = PyFunc[Tin=[DT_FLOAT, DT_FLOAT, DT_FLOAT, DT_INT32, DT_STRING], Tout=[DT_FLOAT], token="pyfunc_1", _device="/job:localhost/replica:0/task:0/cpu:0"](fifo_queue_1_DequeueMany, strided_slice_14/_497, strided_slice_15/_499, Variable/read, PyFunc_1/input_4)]]
+	 [[Node: gradients/decoder_1/mul_5_grad/Shape_1/_607 = _HostRecv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/gpu:0", send_device="/job:localhost/replica:0/task:0/cpu:0", send_device_incarnation=1, tensor_name="edge_51527_gradients/decoder_1/mul_5_grad/Shape_1", tensor_type=DT_INT32, _device="/job:localhost/replica:0/task:0/gpu:0"]()]]
+
