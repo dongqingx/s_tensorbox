@@ -125,25 +125,59 @@ def build_forward(H, x, p_x, pp_x, f_x, phase, reuse):
     p_x -= input_mean
     pp_x -= input_mean
     f_x -= input_mean
+    print "x.shape"
+    print x.get_shape()
+    x = tf.concat(0, (pp_x, p_x, x))
+    print x.get_shape()
+
     cnn, early_feat = googlenet_load.model(x, H, reuse)
+    # p_cnn, p_early_feat = googlenet_load.p_model(p_x, H, reuse)
+    # pp_cnn, pp_early_feat = googlenet_load.pp_model(pp_x, H, reuse)
+    # f_cnn, f_early_feat = googlenet_load.f_model(f_x, H, reuse)
+    pp_cnn = cnn[0]
+    pp_cnn = tf.expand_dims(pp_cnn, 0)
+    p_cnn = cnn[1]
+    p_cnn = tf.expand_dims(p_cnn, 0)
+    c_cnn = cnn[2]
+    cnn = c_cnn
+    cnn = tf.expand_dims(cnn, 0)
     
-    w = tf.Variable(tf.random_normal([1,1,1,1]))
-    # cnn = tf.nn.conv2d(cnn, w, strides=[1, 1, 1, 1], padding='SAME')
-
-    p_cnn, p_early_feat = googlenet_load.p_model(p_x, H, reuse)
-    p_w = tf.Variable(tf.random_normal([1,1,1,1]))
-    # p_cnn = tf.nn.conv2d(p_cnn, p_w, strides=[1, 1, 1, 1], padding='SAME')
-
-    pp_cnn, pp_early_feat = googlenet_load.pp_model(pp_x, H, reuse)
-    pp_w = tf.Variable(tf.random_normal([1,1,1,1]))
-    # pp_cnn = tf.nn.conv2d(pp_cnn, pp_w, strides=[1, 1, 1, 1], padding='SAME')
+    print cnn.get_shape()
     
-    f_cnn, f_early_feat = googlenet_load.f_model(f_x, H, reuse)
-    f_w = tf.Variable(tf.random_normal([1,1,1,1]))
-    # f_cnn = tf.nn.conv2d(f_cnn, f_w, strides=[1, 1, 1, 1], padding='SAME')
 
-    cnn = cnn + p_cnn + pp_cnn
+    with tf.variable_scope("conv_1x1", reuse=reuse):
     
+        # w = tf.Variable(tf.random_normal([1,1,H['later_feat_channels'],H['later_feat_channels']]))
+        c_w = tf.get_variable('c_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                     initializer=tf.random_normal_initializer(stddev=0.01))
+
+        cnn = tf.nn.conv2d(cnn, c_w, strides=[1, 1, 1, 1], padding='SAME')
+
+        p_w = tf.get_variable('p_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
+
+        # p_w = tf.Variable(tf.random_normal([1,1,H['later_feat_channels'],H['later_feat_channels']]))
+        p_cnn = tf.nn.conv2d(p_cnn, p_w, strides=[1, 1, 1, 1], padding='SAME')
+
+        pp_w = tf.get_variable('pp_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
+
+        # pp_w = tf.Variable(tf.random_normal([1,1,H['later_feat_channels'],H['later_feat_channels']]))
+        pp_cnn = tf.nn.conv2d(pp_cnn, pp_w, strides=[1, 1, 1, 1], padding='SAME')
+    
+        f_w = tf.get_variable('f_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                initializer=tf.random_normal_initializer(stddev=0.01))
+
+        # f_w = tf.Variable(tf.random_normal([1,1,H['later_feat_channels'],H['later_feat_channels']]))
+        # f_cnn = tf.nn.conv2d(f_cnn, f_w, strides=[1, 1, 1, 1], padding='SAME')
+
+        # ww = tf.Variable(tf.random_uniform([3], 0.5, 1.0), name='ww')
+        # b = tf.Variable(tf.zeros([1]), name='b')
+        # cnn = cnn * ww[0] + p_cnn * ww[1] + pp_cnn * ww[2]
+        cnn = cnn + p_cnn + pp_cnn
+
+    # sess = tf.Session()
+    # print(sess.run(ww))
     print p_cnn.get_shape()
     # print pp_cnn.shape
     # print f_cnn.shape
@@ -512,7 +546,7 @@ def train(H, test_images):
 
         # train model for N iterations
         start = time.time()
-        max_iter = H['solver'].get('max_iter', 10000000)
+        max_iter = H['solver'].get('max_iter', 500000)
         for i in xrange(max_iter):
             display_iter = H['logging']['display_iter']
             adjusted_lr = (H['solver']['learning_rate'] *

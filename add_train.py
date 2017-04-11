@@ -515,7 +515,7 @@ def train(H, test_images):
 
         # train model for N iterations
         start = time.time()
-        max_iter = H['solver'].get('max_iter', 10000000)
+        max_iter = H['solver'].get('max_iter', 500000)
         for i in xrange(max_iter):
             display_iter = H['logging']['display_iter']
             adjusted_lr = (H['solver']['learning_rate'] *
