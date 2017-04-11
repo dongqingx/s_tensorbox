@@ -125,11 +125,20 @@ def build_forward(H, x, p_x, pp_x, f_x, phase, reuse):
     p_x -= input_mean
     pp_x -= input_mean
     f_x -= input_mean
-    cnn, early_feat = googlenet_load.model(x, H, reuse)
-    p_cnn, p_early_feat = googlenet_load.p_model(p_x, H, reuse)
-    pp_cnn, pp_early_feat = googlenet_load.pp_model(pp_x, H, reuse)
-    f_cnn, f_early_feat = googlenet_load.f_model(f_x, H, reuse)
 
+    x = tf.concat(0, (pp_x, p_x, x))
+    cnn, early_feat = googlenet_load.model(x, H, reuse)
+    # p_cnn, p_early_feat = googlenet_load.p_model(p_x, H, reuse)
+    # pp_cnn, pp_early_feat = googlenet_load.pp_model(pp_x, H, reuse)
+    # f_cnn, f_early_feat = googlenet_load.f_model(f_x, H, reuse)
+
+    pp_cnn = cnn[0]
+    pp_cnn = tf.expand_dims(pp_cnn, 0)
+    p_cnn = cnn[1]
+    p_cnn = tf.expand_dims(p_cnn, 0)
+    c_cnn = cnn[2]
+    cnn = c_cnn
+    cnn = tf.expand_dims(cnn, 0)
     '''
     with tf.variable_scope("conv_1x1", reuse=reuse):
     
@@ -162,7 +171,7 @@ def build_forward(H, x, p_x, pp_x, f_x, phase, reuse):
         # cnn = cnn * ww[0] + p_cnn * ww[1] + pp_cnn * ww[2]
         cnn = cnn + p_cnn + pp_cnn
     '''
-    cnn = tf.concat(3, (p_cnn, pp_cnn, cnn))
+    cnn = tf.concat(3, (pp_cnn, p_cnn, cnn))
     # sess = tf.Session()
     # print(sess.run(ww))
     print p_cnn.get_shape()
