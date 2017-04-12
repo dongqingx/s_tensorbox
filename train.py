@@ -396,13 +396,18 @@ def build(H, q):
 
     learning_rate = tf.placeholder(tf.float32)
     if solver['opt'] == 'RMS':
-        opt = tf.train.RMSPropOptimizer(learning_rate=learning_rate,
+        opt_1 = tf.train.RMSPropOptimizer(learning_rate=learning_rate,
+                                        decay=0.9, epsilon=solver['epsilon'])
+        opt_2 = tf.train.RMSPropOptimizer(learning_rate=learning_rate,
                                         decay=0.9, epsilon=solver['epsilon'])
     elif solver['opt'] == 'Adam':
-        opt = tf.train.AdamOptimizer(learning_rate=learning_rate,
+        opt_1 = tf.train.AdamOptimizer(learning_rate=learning_rate,
+                                        epsilon=solver['epsilon'])
+        opt_2 = tf.train.AdamOptimizer(learning_rate=learning_rate,
                                         epsilon=solver['epsilon'])
     elif solver['opt'] == 'SGD':
-        opt = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
+        opt_1 = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
+        opt_2 = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
     else:
         raise ValueError('Unrecognized opt type')
     loss, accuracy, confidences_loss, boxes_loss = {}, {}, {}, {}
@@ -428,12 +433,16 @@ def build(H, q):
         if phase == 'train':
             global_step = tf.Variable(0, trainable=False)
 
-            tvars = tf.trainable_variables()
+            tvars_1 = tf.trainable_variables()
+            tvars_2 = tf.trainable_variables()
             if H['clip_norm'] <= 0:
-                grads = tf.gradients(loss['train'], tvars)
+                grads_1 = tf.gradients(boxes_loss['train'], tvars_1)
+                grads_2 = tf.gradients(confidences_loss['train', tvars_2])
             else:
-                grads, norm = tf.clip_by_global_norm(tf.gradients(loss['train'], tvars), H['clip_norm'])
-            train_op = opt.apply_gradients(zip(grads, tvars), global_step=global_step)
+                grads_1, norm_1 = tf.clip_by_global_norm(tf.gradients(boxes_loss['train'], tvars_1), H['clip_norm'])
+                grads_2, norm_2 = tf.clip_by_global_norm(tf.gradients(confidences_loss['train'], tvars_2), H['clip_norm'])
+            train_op_1 = opt_1.apply_gradients(zip(grads_1, tvars_1), global_step=global_step)
+            train_op_2 = opt_2.apply_gradients(zip(grads_2, tvars_2), global_step=global_step)
         elif phase == 'test':
             moving_avg = tf.train.ExponentialMovingAverage(0.95)
             smooth_op = moving_avg.apply([accuracy['train'], accuracy['test'],
@@ -598,20 +607,21 @@ def train(H, test_images):
                 if i > 0:
                     dt = (time.time() - start) / (H['batch_size'] * display_iter)
                 start = time.time()
-                (train_loss, test_accuracy, summary_str,
-                    _, _) = sess.run([loss['train'], accuracy['test'],
+                (boxes_loss, confidences_loss, test_accuracy, summary_str,
+                    _, _) = sess.run([boxes_loss['train'], confidences_loss['train'], accuracy['test'],
                                       summary_op, train_op, smooth_op,
                                      ], feed_dict=lr_feed)
                 writer.add_summary(summary_str, global_step=global_step.eval())
                 print_str = string.join([
                     'Step: %d',
                     'lr: %f',
-                    'Train Loss: %.2f',
+                    'Boxes Loss: %.2f',
+                    'Confidences Loss: %.2f',
                     'Softmax Test Accuracy: %.1f%%',
                     'Time/image (ms): %.1f'
                 ], ', ')
                 print(print_str %
-                      (i, adjusted_lr, train_loss,
+                      (i, adjusted_lr, boxes_loss, confidences_loss,
                        test_accuracy * 100, dt * 1000 if i > 0 else 0))
 
             if global_step.eval() % H['logging']['save_iter'] == 0 or global_step.eval() == max_iter - 1:
