@@ -113,7 +113,7 @@ def rezoom(H, pred_boxes, early_feat, early_feat_channels, w_offsets, h_offsets)
                        H['rnn_len'],
                        len(w_offsets) * len(h_offsets) * early_feat_channels])
 
-def build_forward(H, x, p_x, pp_x, f_x, phase, reuse):
+def build_forward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, phase, reuse):
     '''
     Construct the forward model
     '''
@@ -122,51 +122,76 @@ def build_forward(H, x, p_x, pp_x, f_x, phase, reuse):
     outer_size = grid_size * H['batch_size']
     input_mean = 117.
     x -= input_mean
-    p_x -= input_mean
-    pp_x -= input_mean
+    p1_x -= input_mean
+    p2_x -= input_mean
+    p3_x -= input_mean
+    p4_x -= input_mean
+    p5_x -= input_mean
+    p6_x -= input_mean
+    p7_x -= input_mean
+    p8_x -= input_mean
     f_x -= input_mean
-    print "x.shape"
-    print x.get_shape()
-    x = tf.concat(0, (pp_x, p_x, x))
-    print x.get_shape()
+    print "x.shape %s" % str(x.get_shape())
+    x = tf.concat(0, (x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x))
+    print "x.shape %s" % str(x.get_shape())
 
     cnn, early_feat = googlenet_load.model(x, H, reuse)
-    # p_cnn, p_early_feat = googlenet_load.p_model(p_x, H, reuse)
-    # pp_cnn, pp_early_feat = googlenet_load.pp_model(pp_x, H, reuse)
+    # p1_cnn, p1_early_feat = googlenet_load.p1_model(p_x, H, reuse)
+    # p2_cnn, p2_early_feat = googlenet_load.p2_model(pp_x, H, reuse)
     # f_cnn, f_early_feat = googlenet_load.f_model(f_x, H, reuse)
-    pp_cnn = cnn[0]
-    pp_cnn = tf.expand_dims(pp_cnn, 0)
-    p_cnn = cnn[1]
-    p_cnn = tf.expand_dims(p_cnn, 0)
-    c_cnn = cnn[2]
-    cnn = c_cnn
-    cnn = tf.expand_dims(cnn, 0)
+    p1_cnn = tf.expand_dims(cnn[1], 0)
+    p2_cnn = tf.expand_dims(cnn[2], 0)
+    p3_cnn = tf.expand_dims(cnn[3], 0)
+    p4_cnn = tf.expand_dims(cnn[4], 0)
+    p5_cnn = tf.expand_dims(cnn[5], 0)
+    p6_cnn = tf.expand_dims(cnn[6], 0)
+    p7_cnn = tf.expand_dims(cnn[7], 0)
+    p8_cnn = tf.expand_dims(cnn[8], 0)
+    cnn = tf.expand_dims(cnn[0], 0)
     
     print cnn.get_shape()
     
 
     with tf.variable_scope("conv_1x1", reuse=reuse):
     
-        # w = tf.Variable(tf.random_normal([1,1,H['later_feat_channels'],H['later_feat_channels']]))
         c_w = tf.get_variable('c_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
                                      initializer=tf.random_normal_initializer(stddev=0.01))
-
         cnn = tf.nn.conv2d(cnn, c_w, strides=[1, 1, 1, 1], padding='SAME')
 
-        p_w = tf.get_variable('p_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+        p1_w = tf.get_variable('p1_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
                                     initializer=tf.random_normal_initializer(stddev=0.001))
+        p1_cnn = tf.nn.conv2d(p1_cnn, p1_w, strides=[1, 1, 1, 1], padding='SAME')
 
-        # p_w = tf.Variable(tf.random_normal([1,1,H['later_feat_channels'],H['later_feat_channels']]))
-        p_cnn = tf.nn.conv2d(p_cnn, p_w, strides=[1, 1, 1, 1], padding='SAME')
-
-        pp_w = tf.get_variable('pp_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+        p2_w = tf.get_variable('p2_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
                                     initializer=tf.random_normal_initializer(stddev=0.001))
+        p2_cnn = tf.nn.conv2d(p2_cnn, p2_w, strides=[1, 1, 1, 1], padding='SAME')
 
-        # pp_w = tf.Variable(tf.random_normal([1,1,H['later_feat_channels'],H['later_feat_channels']]))
-        pp_cnn = tf.nn.conv2d(pp_cnn, pp_w, strides=[1, 1, 1, 1], padding='SAME')
-    
-        f_w = tf.get_variable('f_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                initializer=tf.random_normal_initializer(stddev=0.01))
+        p3_w = tf.get_variable('p3_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
+        p3_cnn = tf.nn.conv2d(p3_cnn, p3_w, strides=[1, 1, 1, 1], padding='SAME')
+     
+        p4_w = tf.get_variable('p4_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
+        p4_cnn = tf.nn.conv2d(p4_cnn, p4_w, strides=[1, 1, 1, 1], padding='SAME')
+
+        p5_w = tf.get_variable('p5_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
+        p5_cnn = tf.nn.conv2d(p5_cnn, p5_w, strides=[1, 1, 1, 1], padding='SAME')
+
+        p6_w = tf.get_variable('p6_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
+        p6_cnn = tf.nn.conv2d(p6_cnn, p6_w, strides=[1, 1, 1, 1], padding='SAME')
+
+        p7_w = tf.get_variable('p7_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
+        p7_cnn = tf.nn.conv2d(p7_cnn, p7_w, strides=[1, 1, 1, 1], padding='SAME')
+
+        p8_w = tf.get_variable('p8_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
+        p8_cnn = tf.nn.conv2d(p8_cnn, p8_w, strides=[1, 1, 1, 1], padding='SAME')
+  
+        # f_w = tf.get_variable('f_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
+        #                        initializer=tf.random_normal_initializer(stddev=0.01))
 
         # f_w = tf.Variable(tf.random_normal([1,1,H['later_feat_channels'],H['later_feat_channels']]))
         # f_cnn = tf.nn.conv2d(f_cnn, f_w, strides=[1, 1, 1, 1], padding='SAME')
@@ -174,14 +199,11 @@ def build_forward(H, x, p_x, pp_x, f_x, phase, reuse):
         # ww = tf.Variable(tf.random_uniform([3], 0.5, 1.0), name='ww')
         # b = tf.Variable(tf.zeros([1]), name='b')
         # cnn = cnn * ww[0] + p_cnn * ww[1] + pp_cnn * ww[2]
-        cnn = cnn + p_cnn + pp_cnn
+        cnn = cnn + p1_cnn + p2_cnn + p3_cnn + p4_cnn + p5_cnn + p6_cnn + p7_cnn + p8_cnn
 
-    # sess = tf.Session()
-    # print(sess.run(ww))
-    print p_cnn.get_shape()
-    # print pp_cnn.shape
-    # print f_cnn.shape
-    print cnn.get_shape()
+
+    print "p1_cnn: %s" % str(p1_cnn.get_shape())
+    print "cnn: %s" % str(cnn.get_shape())
 
     early_feat_channels = H['early_feat_channels']
     early_feat = early_feat[:, :, :, :early_feat_channels]
@@ -285,7 +307,7 @@ def build_forward(H, x, p_x, pp_x, f_x, phase, reuse):
 
     return pred_boxes, pred_logits, pred_confidences
 
-def build_forward_backward(H, x, p_x, pp_x, f_x, phase, boxes, flags):
+def build_forward_backward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, phase, boxes, flags):
     '''
     Call build_forward() and then setup the loss functions
     '''
@@ -295,9 +317,9 @@ def build_forward_backward(H, x, p_x, pp_x, f_x, phase, boxes, flags):
     reuse = {'train': None, 'test': True}[phase]
     if H['use_rezoom']:
         (pred_boxes, pred_logits,
-         pred_confidences, pred_confs_deltas, pred_boxes_deltas) = build_forward(H, x, p_x, pp_x, f_x, phase, reuse)
+         pred_confidences, pred_confs_deltas, pred_boxes_deltas) = build_forward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, phase, reuse)
     else:
-        pred_boxes, pred_logits, pred_confidences = build_forward(H, x, p_x, pp_x, f_x, phase, reuse)
+        pred_boxes, pred_logits, pred_confidences = build_forward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, phase, reuse)
     with tf.variable_scope('decoder', reuse={'train': None, 'test': True}[phase]):
         outer_boxes = tf.reshape(boxes, [outer_size, H['rnn_len'], 4])
         outer_flags = tf.cast(tf.reshape(flags, [outer_size, H['rnn_len']]), 'int32')
@@ -386,7 +408,7 @@ def build(H, q):
     loss, accuracy, confidences_loss, boxes_loss = {}, {}, {}, {}
     for phase in ['train', 'test']:
         # generate predictions and losses from forward pass
-        x, p_x, pp_x, f_x, confidences, boxes = q[phase].dequeue_many(arch['batch_size'])
+        x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, confidences, boxes = q[phase].dequeue_many(arch['batch_size'])
         flags = tf.argmax(confidences, 3)
 
 
@@ -394,7 +416,7 @@ def build(H, q):
 
         (pred_boxes, pred_confidences,
          loss[phase], confidences_loss[phase],
-         boxes_loss[phase]) = build_forward_backward(H, x, p_x, pp_x, f_x, phase, boxes, flags)
+         boxes_loss[phase]) = build_forward_backward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, phase, boxes, flags)
         pred_confidences_r = tf.reshape(pred_confidences, [H['batch_size'], grid_size, H['rnn_len'], arch['num_classes']])
         pred_boxes_r = tf.reshape(pred_boxes, [H['batch_size'], grid_size, H['rnn_len'], 4])
 
@@ -477,17 +499,29 @@ def train(H, test_images):
         json.dump(H, f, indent=4)
 
     x_in = tf.placeholder(tf.float32)
-    p_x_in = tf.placeholder(tf.float32)
-    pp_x_in = tf.placeholder(tf.float32)
+    p1_x_in = tf.placeholder(tf.float32)
+    p2_x_in = tf.placeholder(tf.float32)
+    p3_x_in = tf.placeholder(tf.float32)
+    p4_x_in = tf.placeholder(tf.float32)
+    p5_x_in = tf.placeholder(tf.float32)
+    p6_x_in = tf.placeholder(tf.float32)
+    p7_x_in = tf.placeholder(tf.float32)
+    p8_x_in = tf.placeholder(tf.float32)
     f_x_in = tf.placeholder(tf.float32)
     confs_in = tf.placeholder(tf.float32)
     boxes_in = tf.placeholder(tf.float32)
     q = {}
     enqueue_op = {}
     for phase in ['train', 'test']:
-        dtypes = [tf.float32, tf.float32, tf.float32, tf.float32, tf.float32, tf.float32]
+        dtypes = [tf.float32, tf.float32, tf.float32, tf.float32, tf.float32, tf.float32, tf.float32, tf.float32, tf.float32, tf.float32, tf.float32, tf.float32]
         grid_size = H['grid_width'] * H['grid_height']
         shapes = (
+            [H['image_height'], H['image_width'], 3],
+            [H['image_height'], H['image_width'], 3],
+            [H['image_height'], H['image_width'], 3],
+            [H['image_height'], H['image_width'], 3],
+            [H['image_height'], H['image_width'], 3],
+            [H['image_height'], H['image_width'], 3],
             [H['image_height'], H['image_width'], 3],
             [H['image_height'], H['image_width'], 3],
             [H['image_height'], H['image_width'], 3],
@@ -495,11 +529,14 @@ def train(H, test_images):
             [grid_size, H['rnn_len'], H['num_classes']],
             [grid_size, H['rnn_len'], 4],
             )
-        q[phase] = tf.FIFOQueue(capacity=100, dtypes=dtypes, shapes=shapes)
-        enqueue_op[phase] = q[phase].enqueue((x_in, p_x_in, pp_x_in, f_x_in, confs_in, boxes_in))
+        q[phase] = tf.FIFOQueue(capacity=300, dtypes=dtypes, shapes=shapes)
+        enqueue_op[phase] = q[phase].enqueue((x_in, p1_x_in, p2_x_in, p3_x_in, p4_x_in, p5_x_in, 
+                                              p6_x_in, p7_x_in, p8_x_in, f_x_in, confs_in, boxes_in))
 
     def make_feed(d):
-        return {x_in: d['image'], p_x_in: d['p_image'], pp_x_in: d['pp_image'],
+        return {x_in: d['image'], p1_x_in: d['p1_image'], p2_x_in: d['p2_image'],
+                p3_x_in: d['p3_image'], p4_x_in: d['p4_image'], p5_x_in: d['p5_image'],
+                p6_x_in: d['p6_image'], p7_x_in: d['p7_image'], p8_x_in: d['p8_image'],
                 f_x_in: d['f_image'], confs_in: d['confs'], boxes_in: d['boxes'],
                 learning_rate: H['solver']['learning_rate']}
 
