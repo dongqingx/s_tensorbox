@@ -21,14 +21,26 @@ def get_image_dir(args):
 def get_results(args, H):
     tf.reset_default_graph()
     x_in = tf.placeholder(tf.float32, name='x_in', shape=[H['image_height'], H['image_width'], 3])
-    p_x_in = tf.placeholder(tf.float32, name='p_x_in', shape=[H['image_height'], H['image_width'], 3])
-    pp_x_in = tf.placeholder(tf.float32, name='pp_x_in', shape=[H['image_height'], H['image_width'], 3])
+    p1_x_in = tf.placeholder(tf.float32, name='p1_x_in', shape=[H['image_height'], H['image_width'], 3])
+    p2_x_in = tf.placeholder(tf.float32, name='p2_x_in', shape=[H['image_height'], H['image_width'], 3])
+    p3_x_in = tf.placeholder(tf.float32, name='p3_x_in', shape=[H['image_height'], H['image_width'], 3])
+    p4_x_in = tf.placeholder(tf.float32, name='p4_x_in', shape=[H['image_height'], H['image_width'], 3])
+    p5_x_in = tf.placeholder(tf.float32, name='p5_x_in', shape=[H['image_height'], H['image_width'], 3])
+    p6_x_in = tf.placeholder(tf.float32, name='p6_x_in', shape=[H['image_height'], H['image_width'], 3])
+    p7_x_in = tf.placeholder(tf.float32, name='p7_x_in', shape=[H['image_height'], H['image_width'], 3])
+    p8_x_in = tf.placeholder(tf.float32, name='p8_x_in', shape=[H['image_height'], H['image_width'], 3])
     f_x_in = tf.placeholder(tf.float32, name='f_x_in', shape=[H['image_height'], H['image_width'], 3])
 
     if H['use_rezoom']:
         pred_boxes, pred_logits, pred_confidences, pred_confs_deltas, pred_boxes_deltas = build_forward(H, tf.expand_dims(x_in, 0), 
-                                                                                                           tf.expand_dims(p_x_in, 0), 
-                                                                                                           tf.expand_dims(pp_x_in, 0),
+                                                                                                           tf.expand_dims(p1_x_in, 0), 
+                                                                                                           tf.expand_dims(p2_x_in, 0),
+                                                                                                           tf.expand_dims(p3_x_in, 0),
+                                                                                                           tf.expand_dims(p4_x_in, 0),
+                                                                                                           tf.expand_dims(p5_x_in, 0),
+                                                                                                           tf.expand_dims(p6_x_in, 0),
+                                                                                                           tf.expand_dims(p7_x_in, 0),
+                                                                                                           tf.expand_dims(p8_x_in, 0),
                                                                                                            tf.expand_dims(f_x_in, 0),
                                                                                                            'test', reuse=None)
         grid_area = H['grid_height'] * H['grid_width']
@@ -54,25 +66,37 @@ def get_results(args, H):
             dir_path = os.path.dirname(true_anno.imageName)
             file_name = true_anno.imageName.split('/')[-1]
             (shotname, extension) = os.path.splitext(file_name)
-            p_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 1)).zfill(4) + ".png"
-            pp_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 2)).zfill(4) + ".png"
+            p1_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 1)).zfill(4) + ".png"
+            p2_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 2)).zfill(4) + ".png"
+            p3_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 3)).zfill(4) + ".png"
+            p4_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 4)).zfill(4) + ".png"
+            p5_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 5)).zfill(4) + ".png"
+            p6_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 6)).zfill(4) + ".png"
+            p7_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 7)).zfill(4) + ".png"
+            p8_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) - 8)).zfill(4) + ".png"
             f_image_path = data_dir + "/" + dir_path + "/" + (str(int(shotname) + 1)).zfill(4) + ".png"
-            if not os.path.exists(p_image_path):
-                print "File not exists: %s" % p_image_path
+            if not os.path.exists(p1_image_path):
+                print "File not exists: %s" % p1_image_path
                 exit()
-            if not os.path.exists(pp_image_path):
-                print "File not exists: %s" % pp_image_path
+            if not os.path.exists(p2_image_path):
+                print "File not exists: %s" % p2_image_path
                 exit()
             if not os.path.exists(f_image_path):
                 print "File not exists: %s" % f_image_path
                 exit()
 
-            p_img = imread(p_image_path)
-            pp_img = imread(pp_image_path)
+            p1_img = imread(p1_image_path)
+            p2_img = imread(p2_image_path)
+            p3_img = imread(p3_image_path)
+            p4_img = imread(p4_image_path)
+            p5_img = imread(p5_image_path)
+            p6_img = imread(p6_image_path)
+            p7_img = imread(p7_image_path)
+            p8_img = imread(p8_image_path)
             f_img = imread(f_image_path)
 
             img = imresize(orig_img, (H["image_height"], H["image_width"]), interp='cubic')
-            feed = {x_in: img, p_x_in: p_img, pp_x_in: pp_img, f_x_in: f_img}
+            feed = {x_in: img, p1_x_in: p1_img, p2_x_in: p2_img, p3_x_in: p3_img, p4_x_in: p4_img, p5_x_in: p5_img, p6_x_in: p6_img, p7_x_in: p7_img, p8_x_in: p8_img, f_x_in: f_img}
             (np_pred_boxes, np_pred_confidences) = sess.run([pred_boxes, pred_confidences], feed_dict=feed)
             pred_anno = al.Annotation()
             pred_anno.imageName = true_anno.imageName
@@ -95,7 +119,7 @@ def main():
     parser.add_argument('--weights', required=True)
     parser.add_argument('--expname', default='')
     parser.add_argument('--test_boxes', required=True)
-    parser.add_argument('--gpu', default=0)
+    parser.add_argument('--gpu', default=1)
     parser.add_argument('--logdir', default='output')
     parser.add_argument('--iou_threshold', default=0.5, type=float)
     parser.add_argument('--tau', default=0.25, type=float)

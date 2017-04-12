@@ -159,35 +159,35 @@ def build_forward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, pha
         cnn = tf.nn.conv2d(cnn, c_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p1_w = tf.get_variable('p1_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.001))
+                                    initializer=tf.random_normal_initializer(stddev=0.01))
         p1_cnn = tf.nn.conv2d(p1_cnn, p1_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p2_w = tf.get_variable('p2_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.001))
+                                    initializer=tf.random_normal_initializer(stddev=0.01))
         p2_cnn = tf.nn.conv2d(p2_cnn, p2_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p3_w = tf.get_variable('p3_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.001))
+                                    initializer=tf.random_normal_initializer(stddev=0.01))
         p3_cnn = tf.nn.conv2d(p3_cnn, p3_w, strides=[1, 1, 1, 1], padding='SAME')
      
         p4_w = tf.get_variable('p4_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.001))
+                                    initializer=tf.random_normal_initializer(stddev=0.01))
         p4_cnn = tf.nn.conv2d(p4_cnn, p4_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p5_w = tf.get_variable('p5_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.001))
+                                    initializer=tf.random_normal_initializer(stddev=0.01))
         p5_cnn = tf.nn.conv2d(p5_cnn, p5_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p6_w = tf.get_variable('p6_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.001))
+                                    initializer=tf.random_normal_initializer(stddev=0.01))
         p6_cnn = tf.nn.conv2d(p6_cnn, p6_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p7_w = tf.get_variable('p7_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.001))
+                                    initializer=tf.random_normal_initializer(stddev=0.01))
         p7_cnn = tf.nn.conv2d(p7_cnn, p7_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p8_w = tf.get_variable('p8_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.001))
+                                    initializer=tf.random_normal_initializer(stddev=0.01))
         p8_cnn = tf.nn.conv2d(p8_cnn, p8_w, strides=[1, 1, 1, 1], padding='SAME')
   
         # f_w = tf.get_variable('f_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
