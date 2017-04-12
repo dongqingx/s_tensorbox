@@ -44,37 +44,80 @@ def load_idl_tf(idlfile, H, jitter):
             dir_path = os.path.dirname(anno.imageName)
             file_name = anno.imageName.split('/')[-1]
             (shotname, extension) = os.path.splitext(file_name)
-            p_image_path = dir_path + "/" + (str(int(shotname) - 1)).zfill(4) + ".png"
-            pp_image_path = dir_path + "/" + (str(int(shotname) - 2)).zfill(4) + ".png"
+            p1_image_path = dir_path + "/" + (str(int(shotname) - 1)).zfill(4) + ".png"
+            p2_image_path = dir_path + "/" + (str(int(shotname) - 2)).zfill(4) + ".png"
+            p3_image_path = dir_path + "/" + (str(int(shotname) - 3)).zfill(4) + ".png"
+            p4_image_path = dir_path + "/" + (str(int(shotname) - 4)).zfill(4) + ".png"
+            p5_image_path = dir_path + "/" + (str(int(shotname) - 5)).zfill(4) + ".png"
+            p6_image_path = dir_path + "/" + (str(int(shotname) - 6)).zfill(4) + ".png"
+            p7_image_path = dir_path + "/" + (str(int(shotname) - 7)).zfill(4) + ".png"
+            p8_image_path = dir_path + "/" + (str(int(shotname) - 8)).zfill(4) + ".png"
             f_image_path = dir_path + "/" + (str(int(shotname) + 1)).zfill(4) + ".png"
-            if not os.path.exists(p_image_path):
-                print "File not exists: %s" % p_image_path
+            if not os.path.exists(p1_image_path):
+                print "File not exists: %s" % p1_image_path
                 exit()
-            if not os.path.exists(pp_image_path):
-                print "File not exists: %s" % pp_image_path
+            if not os.path.exists(p2_image_path):
+                print "File not exists: %s" % p2_image_path
                 exit()
+            if not os.path.exists(p3_image_path):
+                print "File not exists: %s" % p3_image_path
+                exit()
+            if not os.path.exists(p4_image_path):
+                print "File not exists: %s" % p4_image_path
+                exit()
+            if not os.path.exists(p5_image_path):
+                print "File not exists: %s" % p5_image_path
+                exit()
+            if not os.path.exists(p6_image_path):
+                print "File not exists: %s" % p6_image_path
+                exit()
+            if not os.path.exists(p7_image_path):
+                print "File not exists: %s" % p7_image_path
+                exit()
+            if not os.path.exists(p8_image_path):
+                print "File not exists: %s" % p8_image_path
+                exit()
+ 
             if not os.path.exists(f_image_path):
                 print "File not exists: %s" % f_image_path
                 exit()
 
-            p_I = imread(p_image_path)
-            pp_I = imread(pp_image_path)
+            p1_I = imread(p1_image_path)
+            p2_I = imread(p2_image_path)
+            p3_I = imread(p3_image_path)
+            p4_I = imread(p4_image_path)
+            p5_I = imread(p5_image_path)
+            p6_I = imread(p6_image_path)
+            p7_I = imread(p7_image_path)
+            p8_I = imread(p8_image_path)
             f_I = imread(f_image_path) 
 	    #Skip Greyscale images
             if len(I.shape) < 3:
                 continue	    
             if I.shape[2] == 4:
                 I = I[:, :, :3]
-                p_I = p_I[:, :, :3]
-                pp_I = pp_I[:, :, :3]
+                p1_I = p1_I[:, :, :3]
+                p2_I = p2_I[:, :, :3]
+                p3_I = p3_I[:, :, :3]
+                p4_I = p4_I[:, :, :3]
+                p5_I = p5_I[:, :, :3]
+                p6_I = p6_I[:, :, :3]
+                p7_I = p7_I[:, :, :3]
+                p8_I = p8_I[:, :, :3]
                 f_I = f_I[:, :, :3]
 
             if I.shape[0] != H["image_height"] or I.shape[1] != H["image_width"]:
                 if epoch == 0:
                     anno = rescale_boxes(I.shape, anno, H["image_height"], H["image_width"])
                 I = imresize(I, (H["image_height"], H["image_width"]), interp='cubic')
-                p_I = imresize(p_I, (H["image_height"], H["image_width"]), interp='cubic')
-                pp_I = imresize(pp_I, (H["image_height"], H["image_width"]), interp='cubic')
+                p1_I = imresize(p1_I, (H["image_height"], H["image_width"]), interp='cubic')
+                p2_I = imresize(p2_I, (H["image_height"], H["image_width"]), interp='cubic')
+                p3_I = imresize(p3_I, (H["image_height"], H["image_width"]), interp='cubic')
+                p4_I = imresize(p4_I, (H["image_height"], H["image_width"]), interp='cubic')
+                p5_I = imresize(p5_I, (H["image_height"], H["image_width"]), interp='cubic')
+                p6_I = imresize(p6_I, (H["image_height"], H["image_width"]), interp='cubic')
+                p7_I = imresize(p7_I, (H["image_height"], H["image_width"]), interp='cubic')
+                p8_I = imresize(p8_I, (H["image_height"], H["image_width"]), interp='cubic')
                 f_I = imresize(f_I, (H["image_height"], H["image_width"]), interp='cubic')
 
             if jitter:
@@ -94,7 +137,9 @@ def load_idl_tf(idlfile, H, jitter):
                                             H["grid_height"],
                                             H["rnn_len"])
 
-            yield {"image": I, "boxes": boxes, "flags": flags, "p_image": p_I, "pp_image": pp_I, "f_image": f_I}
+            yield {"image": I, "boxes": boxes, "flags": flags, "p1_image": p1_I, 
+                   "p2_image": p2_I, "p3_image": p3_I, "p4_image": p4_I, "p5_image": p5_I,
+                   "p6_image": p6_I, "p7_image": p7_I, "p8_image": p8_I, "f_image": f_I}
 
 def make_sparse(n, d):
     v = np.zeros((d,), dtype=np.float32)
@@ -116,8 +161,14 @@ def load_data_gen(H, phase, jitter):
         assert(boxes.shape == (grid_size, rnn_len, 4))
 
         output['image'] = d['image']
-        output['p_image'] = d['p_image']
-        output['pp_image'] = d['pp_image']
+        output['p1_image'] = d['p1_image']
+        output['p2_image'] = d['p2_image']
+        output['p3_image'] = d['p3_image']
+        output['p4_image'] = d['p4_image']
+        output['p5_image'] = d['p5_image']
+        output['p6_image'] = d['p6_image']
+        output['p7_image'] = d['p7_image']
+        output['p8_image'] = d['p8_image']
         output['f_image'] = d['f_image']
         output['confs'] = np.array([[make_sparse(int(detection), d=H['num_classes']) for detection in cell] for cell in flags])
         output['boxes'] = boxes
