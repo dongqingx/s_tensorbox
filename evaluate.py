@@ -122,7 +122,8 @@ def get_results(args, H):
             # misc.imsave(imname, new_img)
             if i % 25 == 0:
                 print(i)
-    print count_error
+
+    print "Count error: %s" % str(min(count_error) / 350.0)
 
     return pred_annolist, true_annolist
 

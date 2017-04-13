@@ -152,7 +152,7 @@ class MatPlotter:
         firstLine = True
         leadingZeroCount = 0
         ap = 0.0
-        last_p = 1.0
+        last_p = 0.0
         line_count = 0
         for line in file.readlines():
             vals = line.split()
@@ -165,6 +165,7 @@ class MatPlotter:
             self.rec.append(float(vals[1]))
             self.score.append(float(vals[2]))
 
+            last_p = min(last_p, float(vals[0]))
             if(len(vals)>3):
                 self.fppi.append(float(vals[3]))
                 if firstLine and not float(vals[3]) == 0:
@@ -201,7 +202,6 @@ class MatPlotter:
                 averageinfo.append("%d percent recall score: %f, precision: %.03f" % (recallScores[0], float(vals[2]), float(vals[0])))
                 while(len(recallScores) > 0 and recallScores[0] / 100.0 < float(vals[1])):
                     ap += float(vals[0])
-                    last_p = min(last_p, float(vals[0]))
                     print ap
                     recallScores.pop(0)
 
