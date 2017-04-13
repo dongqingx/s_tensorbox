@@ -60,6 +60,10 @@ def get_results(args, H):
         data_dir = os.path.dirname(args.test_boxes)
         image_dir = get_image_dir(args)
         subprocess.call('mkdir -p %s' % image_dir, shell=True)
+        count_error = list()
+        for i in range(20):
+            count_error.append(0)
+
         for i in range(len(true_annolist)):
             true_anno = true_annolist[i]
             orig_img = imread('%s/%s' % (data_dir, true_anno.imageName))[:,:,:3]
@@ -100,19 +104,28 @@ def get_results(args, H):
             (np_pred_boxes, np_pred_confidences) = sess.run([pred_boxes, pred_confidences], feed_dict=feed)
             pred_anno = al.Annotation()
             pred_anno.imageName = true_anno.imageName
-            new_img, rects = add_rectangles(H, [img], np_pred_confidences, np_pred_boxes,
-                                            use_stitching=True, rnn_len=H['rnn_len'], min_conf=args.min_conf, tau=args.tau, show_suppressed=args.show_suppressed)
+
+            true_count = len(true_anno.rects)
+            # print true_count
+            for j in range(20):
+                min_confidence = (j * 1.0) / 20.0
+                new_img, rects, count = add_rectangles(H, [img], np_pred_confidences, np_pred_boxes,
+                                            use_stitching=True, rnn_len=H['rnn_len'], min_conf=min_confidence, tau=args.tau, show_suppressed=args.show_suppressed)
+                count_error[j] += abs(count - true_count)
         
             pred_anno.rects = rects
             pred_anno.imagePath = os.path.abspath(data_dir)
             pred_anno = rescale_boxes((H["image_height"], H["image_width"]), pred_anno, orig_img.shape[0], orig_img.shape[1])
             pred_annolist.append(pred_anno)
             
-            imname = '%s/%s' % (image_dir, os.path.basename(true_anno.imageName))
-            misc.imsave(imname, new_img)
+            # imname = '%s/%s' % (image_dir, os.path.basename(true_anno.imageName))
+            # misc.imsave(imname, new_img)
             if i % 25 == 0:
                 print(i)
+    print count_error
+
     return pred_annolist, true_annolist
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -124,7 +137,7 @@ def main():
     parser.add_argument('--iou_threshold', default=0.5, type=float)
     parser.add_argument('--tau', default=0.25, type=float)
     parser.add_argument('--min_conf', default=0.1, type=float)
-    parser.add_argument('--show_suppressed', default=True, type=bool)
+    parser.add_argument('--show_suppressed', default=False, type=bool)
     args = parser.parse_args()
     os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
     hypes_file = '%s/hypes.json' % os.path.dirname(args.weights)

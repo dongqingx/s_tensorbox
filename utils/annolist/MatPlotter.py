@@ -130,6 +130,10 @@ class MatPlotter:
         for i in range(1,10,1):
             precScores.append(100 - i * 10)
 
+        recallScores = []
+        for i in range(1,10,1):
+            recallScores.append(i * 10)
+
         fppiScores=[]
         for i in range(0, 500, 5):
             fppiScores.append(i * 1.0 / 100.0)
@@ -138,6 +142,7 @@ class MatPlotter:
 
         precinfo = []
         fppiinfo = []
+        averageinfo = []
         eerinfo = []
         logAvInfo = []
 
@@ -146,7 +151,9 @@ class MatPlotter:
         self.eer = None;
         firstLine = True
         leadingZeroCount = 0
-
+        ap = 0.0
+        last_p = 1.0
+        line_count = 0
         for line in file.readlines():
             vals = line.split()
             #vals=line.split(" ")
@@ -154,6 +161,7 @@ class MatPlotter:
             #       if val=="":
             #               vals.remove(val)
             self.prec.append(1-float(vals[0]))
+            # ap += 1 - float(vals[0])
             self.rec.append(float(vals[1]))
             self.score.append(float(vals[2]))
 
@@ -189,6 +197,15 @@ class MatPlotter:
                 while(len(precScores) > 0 and precScores[0]/100.0 > float(vals[0])):
                     precScores.pop(0)
 
+            if (len(recallScores) > 0 and (float(vals[1])) > recallScores[0] / 100.0):
+                averageinfo.append("%d percent recall score: %f, precision: %.03f" % (recallScores[0], float(vals[2]), float(vals[0])))
+                while(len(recallScores) > 0 and recallScores[0] / 100.0 < float(vals[1])):
+                    ap += float(vals[0])
+                    last_p = min(last_p, float(vals[0]))
+                    print ap
+                    recallScores.pop(0)
+
+
             #Remove already passed precision
             if(len(vals) > 3):
                 if (len(fppiScores) > 0 and (float(vals[3])) > fppiScores[0]):
@@ -221,6 +238,13 @@ class MatPlotter:
         for i in eerinfo:
             print i;
         print
+        for i in averageinfo:
+            print i;
+        print
+        print last_p
+        ap = ap + last_p * len(recallScores)
+        print "Average Precision: %.03f" % (ap / 9.0)
+        print
         print "Recall at first false positive: %.03f" % self.rec[0]
         if(len(vals)>3):
             print
@@ -233,6 +257,7 @@ class MatPlotter:
 
         print; print
         file.close()
+
 
     def loadFreqData(self, fname):
         self.filename = fname

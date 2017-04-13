@@ -214,15 +214,17 @@ def add_rectangles(H, orig_image, confidences, boxes, use_stitching=False, rnn_l
         pairs = [(all_rects_r, (255, 0, 0))]
     else:
         pairs = []
+    count = 0
     pairs.append((acc_rects, (0, 255, 0)))
     for rect_set, color in pairs:
         for rect in rect_set:
             if rect.confidence > min_conf:
-                cv2.rectangle(image,
-                    (rect.cx-int(rect.width/2), rect.cy-int(rect.height/2)),
-                    (rect.cx+int(rect.width/2), rect.cy+int(rect.height/2)),
-                    color,
-                    2)
+                count = count + 1
+                # cv2.rectangle(image,
+                #    (rect.cx-int(rect.width/2), rect.cy-int(rect.height/2)),
+                #    (rect.cx+int(rect.width/2), rect.cy+int(rect.height/2)),
+                #    color,
+                #    2)
 
     rects = []
     for rect in acc_rects:
@@ -234,7 +236,7 @@ def add_rectangles(H, orig_image, confidences, boxes, use_stitching=False, rnn_l
         r.score = rect.true_confidence
         rects.append(r)
 
-    return image, rects
+    return image, rects, count
 
 def to_x1y1x2y2(box):
     w = tf.maximum(box[:, 2:3], 1)
