@@ -1,6 +1,12 @@
 from slim_nets import inception_v1 as inception
-from slim_nets import p_inception_v1 as p_inception
-from slim_nets import pp_inception_v1 as pp_inception
+from slim_nets import p1_inception_v1 as p1_inception
+from slim_nets import p2_inception_v1 as p2_inception
+from slim_nets import p3_inception_v1 as p3_inception
+from slim_nets import p4_inception_v1 as p4_inception
+from slim_nets import p5_inception_v1 as p5_inception
+from slim_nets import p6_inception_v1 as p6_inception
+from slim_nets import p7_inception_v1 as p7_inception
+from slim_nets import p8_inception_v1 as p8_inception
 from slim_nets import f_inception_v1 as f_inception
 from slim_nets import resnet_v1 as resnet
 import tensorflow.contrib.slim as slim
@@ -30,7 +36,7 @@ def model(x, H, reuse, is_training=True):
 
     return coarse_feat, early_feat
 
-def p_model(x, H, reuse, is_training=True):
+def p1_model(x, H, reuse, is_training=True):
     if H['slim_basename'] == 'resnet_v1_101':
         with slim.arg_scope(resnet.resnet_arg_scope()):
             _, T = resnet.resnet_v1_101(x,
@@ -39,7 +45,7 @@ def p_model(x, H, reuse, is_training=True):
                                         reuse=reuse)
     elif H['slim_basename'] == 'InceptionV1':
         with slim.arg_scope(inception.inception_v1_arg_scope()):
-            _, T = p_inception.inception_v1(x,
+            _, T = p1_inception.inception_v1(x,
                                           is_training=is_training,
                                           num_classes=1001,
                                           spatial_squeeze=False,
@@ -55,7 +61,7 @@ def p_model(x, H, reuse, is_training=True):
 
     return coarse_feat, early_feat
 
-def pp_model(x, H, reuse, is_training=True):
+def p2_model(x, H, reuse, is_training=True):
     if H['slim_basename'] == 'resnet_v1_101':
         with slim.arg_scope(resnet.resnet_arg_scope()):
             _, T = resnet.resnet_v1_101(x,
@@ -64,7 +70,7 @@ def pp_model(x, H, reuse, is_training=True):
                                         reuse=reuse)
     elif H['slim_basename'] == 'InceptionV1':
         with slim.arg_scope(inception.inception_v1_arg_scope()):
-            _, T = pp_inception.inception_v1(x,
+            _, T = p2_inception.inception_v1(x,
                                           is_training=is_training,
                                           num_classes=1001,
                                           spatial_squeeze=False,
@@ -79,6 +85,157 @@ def pp_model(x, H, reuse, is_training=True):
     early_feat = T[attention_lname]
 
     return coarse_feat, early_feat
+
+def p3_model(x, H, reuse, is_training=True):
+    if H['slim_basename'] == 'resnet_v1_101':
+        with slim.arg_scope(resnet.resnet_arg_scope()):
+            _, T = resnet.resnet_v1_101(x,
+                                        is_training=is_training,
+                                        num_classes=1000,
+                                        reuse=reuse)
+    elif H['slim_basename'] == 'InceptionV1':
+        with slim.arg_scope(inception.inception_v1_arg_scope()):
+            _, T = p3_inception.inception_v1(x,
+                                          is_training=is_training,
+                                          num_classes=1001,
+                                          spatial_squeeze=False,
+                                          reuse=reuse)
+    #print '\n'.join(map(str, [(k, v.op.outputs[0].get_shape()) for k, v in T.iteritems()]))
+
+    coarse_feat = T[H['slim_top_lname']][:, :, :, :H['later_feat_channels']]
+    assert coarse_feat.op.outputs[0].get_shape()[3] == H['later_feat_channels']
+
+    # fine feat can be used to reinspect input
+    attention_lname = H.get('slim_attention_lname', 'Mixed_3b')
+    early_feat = T[attention_lname]
+
+    return coarse_feat, early_feat
+
+def p4_model(x, H, reuse, is_training=True):
+    if H['slim_basename'] == 'resnet_v1_101':
+        with slim.arg_scope(resnet.resnet_arg_scope()):
+            _, T = resnet.resnet_v1_101(x,
+                                        is_training=is_training,
+                                        num_classes=1000,
+                                        reuse=reuse)
+    elif H['slim_basename'] == 'InceptionV1':
+        with slim.arg_scope(inception.inception_v1_arg_scope()):
+            _, T = p4_inception.inception_v1(x,
+                                          is_training=is_training,
+                                          num_classes=1001,
+                                          spatial_squeeze=False,
+                                          reuse=reuse)
+    #print '\n'.join(map(str, [(k, v.op.outputs[0].get_shape()) for k, v in T.iteritems()]))
+
+    coarse_feat = T[H['slim_top_lname']][:, :, :, :H['later_feat_channels']]
+    assert coarse_feat.op.outputs[0].get_shape()[3] == H['later_feat_channels']
+
+    # fine feat can be used to reinspect input
+    attention_lname = H.get('slim_attention_lname', 'Mixed_3b')
+    early_feat = T[attention_lname]
+
+    return coarse_feat, early_feat
+
+def p5_model(x, H, reuse, is_training=True):
+    if H['slim_basename'] == 'resnet_v1_101':
+        with slim.arg_scope(resnet.resnet_arg_scope()):
+            _, T = resnet.resnet_v1_101(x,
+                                        is_training=is_training,
+                                        num_classes=1000,
+                                        reuse=reuse)
+    elif H['slim_basename'] == 'InceptionV1':
+        with slim.arg_scope(inception.inception_v1_arg_scope()):
+            _, T = p5_inception.inception_v1(x,
+                                          is_training=is_training,
+                                          num_classes=1001,
+                                          spatial_squeeze=False,
+                                          reuse=reuse)
+    #print '\n'.join(map(str, [(k, v.op.outputs[0].get_shape()) for k, v in T.iteritems()]))
+
+    coarse_feat = T[H['slim_top_lname']][:, :, :, :H['later_feat_channels']]
+    assert coarse_feat.op.outputs[0].get_shape()[3] == H['later_feat_channels']
+
+    # fine feat can be used to reinspect input
+    attention_lname = H.get('slim_attention_lname', 'Mixed_3b')
+    early_feat = T[attention_lname]
+
+    return coarse_feat, early_feat
+
+def p6_model(x, H, reuse, is_training=True):
+    if H['slim_basename'] == 'resnet_v1_101':
+        with slim.arg_scope(resnet.resnet_arg_scope()):
+            _, T = resnet.resnet_v1_101(x,
+                                        is_training=is_training,
+                                        num_classes=1000,
+                                        reuse=reuse)
+    elif H['slim_basename'] == 'InceptionV1':
+        with slim.arg_scope(inception.inception_v1_arg_scope()):
+            _, T = p6_inception.inception_v1(x,
+                                          is_training=is_training,
+                                          num_classes=1001,
+                                          spatial_squeeze=False,
+                                          reuse=reuse)
+    #print '\n'.join(map(str, [(k, v.op.outputs[0].get_shape()) for k, v in T.iteritems()]))
+
+    coarse_feat = T[H['slim_top_lname']][:, :, :, :H['later_feat_channels']]
+    assert coarse_feat.op.outputs[0].get_shape()[3] == H['later_feat_channels']
+
+    # fine feat can be used to reinspect input
+    attention_lname = H.get('slim_attention_lname', 'Mixed_3b')
+    early_feat = T[attention_lname]
+
+    return coarse_feat, early_feat
+
+def p7_model(x, H, reuse, is_training=True):
+    if H['slim_basename'] == 'resnet_v1_101':
+        with slim.arg_scope(resnet.resnet_arg_scope()):
+            _, T = resnet.resnet_v1_101(x,
+                                        is_training=is_training,
+                                        num_classes=1000,
+                                        reuse=reuse)
+    elif H['slim_basename'] == 'InceptionV1':
+        with slim.arg_scope(inception.inception_v1_arg_scope()):
+            _, T = p7_inception.inception_v1(x,
+                                          is_training=is_training,
+                                          num_classes=1001,
+                                          spatial_squeeze=False,
+                                          reuse=reuse)
+    #print '\n'.join(map(str, [(k, v.op.outputs[0].get_shape()) for k, v in T.iteritems()]))
+
+    coarse_feat = T[H['slim_top_lname']][:, :, :, :H['later_feat_channels']]
+    assert coarse_feat.op.outputs[0].get_shape()[3] == H['later_feat_channels']
+
+    # fine feat can be used to reinspect input
+    attention_lname = H.get('slim_attention_lname', 'Mixed_3b')
+    early_feat = T[attention_lname]
+
+    return coarse_feat, early_feat
+
+def p8_model(x, H, reuse, is_training=True):
+    if H['slim_basename'] == 'resnet_v1_101':
+        with slim.arg_scope(resnet.resnet_arg_scope()):
+            _, T = resnet.resnet_v1_101(x,
+                                        is_training=is_training,
+                                        num_classes=1000,
+                                        reuse=reuse)
+    elif H['slim_basename'] == 'InceptionV1':
+        with slim.arg_scope(inception.inception_v1_arg_scope()):
+            _, T = p8_inception.inception_v1(x,
+                                          is_training=is_training,
+                                          num_classes=1001,
+                                          spatial_squeeze=False,
+                                          reuse=reuse)
+    #print '\n'.join(map(str, [(k, v.op.outputs[0].get_shape()) for k, v in T.iteritems()]))
+
+    coarse_feat = T[H['slim_top_lname']][:, :, :, :H['later_feat_channels']]
+    assert coarse_feat.op.outputs[0].get_shape()[3] == H['later_feat_channels']
+
+    # fine feat can be used to reinspect input
+    attention_lname = H.get('slim_attention_lname', 'Mixed_3b')
+    early_feat = T[attention_lname]
+
+    return coarse_feat, early_feat
+
 
 def f_model(x, H, reuse, is_training=True):
     if H['slim_basename'] == 'resnet_v1_101':
