@@ -1,0 +1,4 @@
+1 link
+2 norm googlenet
+3 conv 9 channels
+4 link 9 channels

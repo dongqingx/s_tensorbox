@@ -132,13 +132,20 @@ def build_forward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, pha
     p8_x -= input_mean
     f_x -= input_mean
     print "x.shape %s" % str(x.get_shape())
-    x = tf.concat(0, (x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x))
+    # x = tf.concat(0, (x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x))
     print "x.shape %s" % str(x.get_shape())
 
     cnn, early_feat = googlenet_load.model(x, H, reuse)
-    # p1_cnn, p1_early_feat = googlenet_load.p1_model(p_x, H, reuse)
-    # p2_cnn, p2_early_feat = googlenet_load.p2_model(pp_x, H, reuse)
+    p1_cnn, p1_early_feat = googlenet_load.p1_model(p1_x, H, reuse)
+    p2_cnn, p2_early_feat = googlenet_load.p2_model(p2_x, H, reuse)
     # f_cnn, f_early_feat = googlenet_load.f_model(f_x, H, reuse)
+    p3_cnn, p3_early_feat = googlenet_load.p3_model(p3_x, H, reuse)
+    p4_cnn, p4_early_feat = googlenet_load.p4_model(p4_x, H, reuse)
+    p5_cnn, p5_early_feat = googlenet_load.p5_model(p5_x, H, reuse)
+    p6_cnn, p6_early_feat = googlenet_load.p6_model(p6_x, H, reuse)
+    p7_cnn, p7_early_feat = googlenet_load.p7_model(p7_x, H, reuse)
+    p8_cnn, p8_early_feat = googlenet_load.p8_model(p8_x, H, reuse)
+    '''
     p1_cnn = tf.expand_dims(cnn[1], 0)
     p2_cnn = tf.expand_dims(cnn[2], 0)
     p3_cnn = tf.expand_dims(cnn[3], 0)
@@ -151,7 +158,7 @@ def build_forward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, pha
     
     print cnn.get_shape()
     
-
+    
     with tf.variable_scope("conv_1x1", reuse=reuse):
     
         c_w = tf.get_variable('c_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
@@ -159,35 +166,35 @@ def build_forward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, pha
         cnn = tf.nn.conv2d(cnn, c_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p1_w = tf.get_variable('p1_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.01))
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
         p1_cnn = tf.nn.conv2d(p1_cnn, p1_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p2_w = tf.get_variable('p2_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.01))
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
         p2_cnn = tf.nn.conv2d(p2_cnn, p2_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p3_w = tf.get_variable('p3_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.01))
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
         p3_cnn = tf.nn.conv2d(p3_cnn, p3_w, strides=[1, 1, 1, 1], padding='SAME')
      
         p4_w = tf.get_variable('p4_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.01))
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
         p4_cnn = tf.nn.conv2d(p4_cnn, p4_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p5_w = tf.get_variable('p5_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.01))
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
         p5_cnn = tf.nn.conv2d(p5_cnn, p5_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p6_w = tf.get_variable('p6_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.01))
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
         p6_cnn = tf.nn.conv2d(p6_cnn, p6_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p7_w = tf.get_variable('p7_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.01))
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
         p7_cnn = tf.nn.conv2d(p7_cnn, p7_w, strides=[1, 1, 1, 1], padding='SAME')
 
         p8_w = tf.get_variable('p8_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
-                                    initializer=tf.random_normal_initializer(stddev=0.01))
+                                    initializer=tf.random_normal_initializer(stddev=0.001))
         p8_cnn = tf.nn.conv2d(p8_cnn, p8_w, strides=[1, 1, 1, 1], padding='SAME')
   
         # f_w = tf.get_variable('f_w', shape=[1, 1, H['later_feat_channels'], H['later_feat_channels']],
@@ -201,13 +208,15 @@ def build_forward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, pha
         # cnn = cnn * ww[0] + p_cnn * ww[1] + pp_cnn * ww[2]
         cnn = cnn + p1_cnn + p2_cnn + p3_cnn + p4_cnn + p5_cnn + p6_cnn + p7_cnn + p8_cnn
 
+    '''
+    cnn = tf.concat(3, (p8_cnn, p7_cnn, p6_cnn, p5_cnn, p4_cnn, p3_cnn, p2_cnn, p1_cnn, cnn))
 
     print "p1_cnn: %s" % str(p1_cnn.get_shape())
     print "cnn: %s" % str(cnn.get_shape())
-
+    
     early_feat_channels = H['early_feat_channels']
     early_feat = early_feat[:, :, :, :early_feat_channels]
-    
+    ''' 
     if H['deconv']:
         size = 3
         stride = 2
@@ -231,13 +240,13 @@ def build_forward(H, x, p1_x, p2_x, p3_x, p4_x, p5_x, p6_x, p7_x, p8_x, f_x, pha
         cnn2 = tf.nn.avg_pool(cnn2, ksize=[1, pool_size, pool_size, 1],
                               strides=[1, 1, 1, 1], padding='SAME')
         cnn = tf.concat(3, [cnn1, cnn2])
-
+    '''
     cnn = tf.reshape(cnn,
-                     [H['batch_size'] * H['grid_width'] * H['grid_height'], H['later_feat_channels']])
+                     [H['batch_size'] * H['grid_width'] * H['grid_height'], H['later_feat_channels']*9])
     initializer = tf.random_uniform_initializer(-0.1, 0.1)
     with tf.variable_scope('decoder', reuse=reuse, initializer=initializer):
         scale_down = 0.01
-        lstm_input = tf.reshape(cnn * scale_down, (H['batch_size'] * grid_size, H['later_feat_channels']))
+        lstm_input = tf.reshape(cnn * scale_down, (H['batch_size'] * grid_size, H['later_feat_channels']*9))
         if H['use_lstm']:
             lstm_outputs = build_lstm_inner(H, lstm_input)
         else:
