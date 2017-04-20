@@ -9,6 +9,7 @@ from slim_nets import p7_inception_v1 as p7_inception
 from slim_nets import p8_inception_v1 as p8_inception
 from slim_nets import f_inception_v1 as f_inception
 from slim_nets import resnet_v1 as resnet
+from slim_nets import inception_resnet_v2 as in_resnet
 import tensorflow.contrib.slim as slim
 
 def model(x, H, reuse, is_training=True):
@@ -25,6 +26,13 @@ def model(x, H, reuse, is_training=True):
                                           num_classes=1001,
                                           spatial_squeeze=False,
                                           reuse=reuse)
+    elif H['slim_basename'] == 'InceptionResnetV4':
+        with slim.arg_scope(in_resnet.inception_resnet_v2_arg_scope()):
+            _, T = in_resnet.inception_resnet_v2(x,
+                                                 is_training=is_training,
+                                                 num_classes=1001,
+                                                 reuse = reuse)
+            
     #print '\n'.join(map(str, [(k, v.op.outputs[0].get_shape()) for k, v in T.iteritems()]))
 
     coarse_feat = T[H['slim_top_lname']][:, :, :, :H['later_feat_channels']]
