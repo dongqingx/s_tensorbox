@@ -1,0 +1,187 @@
+x.shape (1, 480, 640, 3)
+x.shape (9, 480, 640, 3)
+('MaxPool_3a_3x3', TensorShape([Dimension(9), Dimension(60), Dimension(80), Dimension(192)]))
+('MaxPool_2a_3x3', TensorShape([Dimension(9), Dimension(120), Dimension(160), Dimension(64)]))
+('Predictions', TensorShape([Dimension(9), Dimension(9), Dimension(14), Dimension(1001)]))
+('Conv2d_1a_7x7', TensorShape([Dimension(9), Dimension(240), Dimension(320), Dimension(64)]))
+('Mixed_4d', TensorShape([Dimension(9), Dimension(30), Dimension(40), Dimension(512)]))
+('MaxPool_4a_3x3', TensorShape([Dimension(9), Dimension(30), Dimension(40), Dimension(480)]))
+('Mixed_3c', TensorShape([Dimension(9), Dimension(60), Dimension(80), Dimension(480)]))
+('Mixed_3b', TensorShape([Dimension(9), Dimension(60), Dimension(80), Dimension(256)]))
+('Mixed_5c', TensorShape([Dimension(9), Dimension(15), Dimension(20), Dimension(1024)]))
+('Mixed_5b', TensorShape([Dimension(9), Dimension(15), Dimension(20), Dimension(832)]))
+('Mixed_4b', TensorShape([Dimension(9), Dimension(30), Dimension(40), Dimension(512)]))
+('Mixed_4c', TensorShape([Dimension(9), Dimension(30), Dimension(40), Dimension(512)]))
+('Conv2d_2c_3x3', TensorShape([Dimension(9), Dimension(120), Dimension(160), Dimension(192)]))
+('Conv2d_2b_1x1', TensorShape([Dimension(9), Dimension(120), Dimension(160), Dimension(64)]))
+('Mixed_4e', TensorShape([Dimension(9), Dimension(30), Dimension(40), Dimension(528)]))
+('Logits', TensorShape([Dimension(9), Dimension(9), Dimension(14), Dimension(1001)]))
+('Mixed_4f', TensorShape([Dimension(9), Dimension(30), Dimension(40), Dimension(832)]))
+('MaxPool_5a_2x2', TensorShape([Dimension(9), Dimension(15), Dimension(20), Dimension(832)]))
+(9, 15, 20, 832)
+cnn.shape (15, 20, 832, 9)
+cnn: (1, 15, 20, 832)
+0
+25
+50
+75
+100
+125
+150
+175
+200
+225
+250
+275
+300
+325
+Count error: 1.75142857143
+saving:  output/lstm_rezoom_2017_04_20_18.32/save.ckpt-100000.test_boxes.json
+saving:  output/lstm_rezoom_2017_04_20_18.32/save.ckpt-100000.gt_test_boxes.json
+$ ./utils/annolist/doRPC.py --minOverlap 0.500000 output/lstm_rezoom_2017_04_20_18.32/save.ckpt-100000.gt_test_boxes.json output/lstm_rezoom_2017_04_20_18.32/save.ckpt-100000.test_boxes.json
+Minimum width: 0 height: 0
+Asorting too large/ too small detections
+minWidth: 0
+minHeight: 0
+maxWidth:  inf
+maxHeight:  inf
+#Annotations: 6117
+Setting up graphs ...
+missingFrames:  0
+Number of detections on annotated frames:  7193
+Sorting scores ...
+Gradually decrease score ...
+saving:
+/home/donny/Projects/s_tensorbox/output/lstm_rezoom_2017_04_20_18.32/rpc-save.ckpt-100000.test_boxes_overlap0.5.txt
+
+$ ./utils/annolist/plotSimple.py /home/donny/Projects/s_tensorbox/output/lstm_rezoom_2017_04_20_18.32/rpc-save.ckpt-100000.test_boxes_overlap0.5.txt --output output/lstm_rezoom_2017_04_20_18.32/images_test_boxes_100000/results.png
+output results at: Plotting: output/lstm_rezoom_2017_04_20_18.32/rpc-save.ckpt-100000.test_boxes_overlap0.5.txt
+lowest_fppi:  -25.0
+0.993506493506
+1.97980786337
+2.95072272323
+3.90286280105
+4.8406310414
+5.75313414853
+6.62416750899
+90 percent precision score: 0.897635, recall: 0.629
+80 percent precision score: 0.577139, recall: 0.748
+70 percent precision score: 0.009835, recall: 0.763
+
+0.000000 fppi score: inf, recall: 0.000
+0.050000 fppi score: 0.994853, recall: 0.203
+0.100000 fppi score: 0.992391, recall: 0.250
+0.150000 fppi score: 0.989402, recall: 0.298
+0.200000 fppi score: 0.986839, recall: 0.332
+0.250000 fppi score: 0.984011, recall: 0.360
+0.300000 fppi score: 0.981275, recall: 0.386
+0.350000 fppi score: 0.979248, recall: 0.400
+0.400000 fppi score: 0.974737, recall: 0.429
+0.450000 fppi score: 0.970651, recall: 0.450
+0.500000 fppi score: 0.966639, recall: 0.467
+0.550000 fppi score: 0.961548, recall: 0.485
+0.600000 fppi score: 0.954737, recall: 0.508
+0.650000 fppi score: 0.949900, recall: 0.524
+0.700000 fppi score: 0.946382, recall: 0.534
+0.750000 fppi score: 0.942263, recall: 0.546
+0.800000 fppi score: 0.936225, recall: 0.558
+0.850000 fppi score: 0.931262, recall: 0.566
+0.900000 fppi score: 0.924630, recall: 0.580
+0.950000 fppi score: 0.921795, recall: 0.587
+1.000000 fppi score: 0.915335, recall: 0.599
+1.050000 fppi score: 0.910592, recall: 0.608
+1.100000 fppi score: 0.906117, recall: 0.616
+1.150000 fppi score: 0.902857, recall: 0.621
+1.200000 fppi score: 0.898965, recall: 0.627
+1.250000 fppi score: 0.895061, recall: 0.633
+1.300000 fppi score: 0.890314, recall: 0.639
+1.350000 fppi score: 0.884581, recall: 0.644
+1.400000 fppi score: 0.879671, recall: 0.651
+1.450000 fppi score: 0.876121, recall: 0.656
+1.500000 fppi score: 0.870770, recall: 0.661
+1.550000 fppi score: 0.865089, recall: 0.669
+1.600000 fppi score: 0.860789, recall: 0.675
+1.650000 fppi score: 0.854900, recall: 0.681
+1.700000 fppi score: 0.850164, recall: 0.687
+1.750000 fppi score: 0.841640, recall: 0.694
+1.800000 fppi score: 0.835883, recall: 0.699
+1.850000 fppi score: 0.830422, recall: 0.704
+1.900000 fppi score: 0.824915, recall: 0.709
+1.950000 fppi score: 0.819130, recall: 0.714
+2.000000 fppi score: 0.813901, recall: 0.717
+2.050000 fppi score: 0.810305, recall: 0.720
+2.100000 fppi score: 0.805661, recall: 0.722
+2.150000 fppi score: 0.799620, recall: 0.726
+2.200000 fppi score: 0.787393, recall: 0.729
+2.250000 fppi score: 0.777269, recall: 0.731
+2.300000 fppi score: 0.769666, recall: 0.733
+2.350000 fppi score: 0.759588, recall: 0.734
+2.400000 fppi score: 0.756050, recall: 0.734
+2.450000 fppi score: 0.750588, recall: 0.735
+2.500000 fppi score: 0.741791, recall: 0.737
+2.550000 fppi score: 0.734168, recall: 0.739
+2.600000 fppi score: 0.718912, recall: 0.741
+2.650000 fppi score: 0.710278, recall: 0.742
+2.700000 fppi score: 0.704291, recall: 0.742
+2.750000 fppi score: 0.690886, recall: 0.743
+2.800000 fppi score: 0.677652, recall: 0.743
+2.850000 fppi score: 0.662371, recall: 0.744
+2.900000 fppi score: 0.651824, recall: 0.744
+2.950000 fppi score: 0.645461, recall: 0.745
+3.000000 fppi score: 0.631693, recall: 0.745
+3.050000 fppi score: 0.619932, recall: 0.746
+3.100000 fppi score: 0.611092, recall: 0.746
+3.150000 fppi score: 0.592780, recall: 0.747
+3.250000 fppi score: 0.582682, recall: 0.747
+3.300000 fppi score: 0.566557, recall: 0.748
+3.350000 fppi score: 0.552188, recall: 0.749
+3.400000 fppi score: 0.531397, recall: 0.749
+3.450000 fppi score: 0.524243, recall: 0.749
+3.500000 fppi score: 0.508218, recall: 0.750
+3.550000 fppi score: 0.478334, recall: 0.750
+3.650000 fppi score: 0.459019, recall: 0.750
+3.700000 fppi score: 0.442621, recall: 0.751
+3.750000 fppi score: 0.427260, recall: 0.751
+3.800000 fppi score: 0.404557, recall: 0.751
+3.850000 fppi score: 0.373510, recall: 0.752
+3.900000 fppi score: 0.354050, recall: 0.752
+3.950000 fppi score: 0.324233, recall: 0.752
+4.000000 fppi score: 0.302685, recall: 0.753
+4.050000 fppi score: 0.283915, recall: 0.753
+4.100000 fppi score: 0.247950, recall: 0.753
+4.200000 fppi score: 0.230285, recall: 0.754
+4.250000 fppi score: 0.217418, recall: 0.754
+4.300000 fppi score: 0.206609, recall: 0.754
+4.350000 fppi score: 0.173399, recall: 0.756
+4.400000 fppi score: 0.155677, recall: 0.756
+4.500000 fppi score: 0.139601, recall: 0.757
+4.550000 fppi score: 0.125440, recall: 0.757
+4.600000 fppi score: 0.112790, recall: 0.758
+4.650000 fppi score: 0.095901, recall: 0.758
+4.700000 fppi score: 0.081889, recall: 0.758
+4.750000 fppi score: 0.079673, recall: 0.758
+4.800000 fppi score: 0.065134, recall: 0.758
+4.850000 fppi score: 0.062169, recall: 0.758
+4.900000 fppi score: 0.058075, recall: 0.758
+4.950000 fppi score: 0.050881, recall: 0.759
+
+EER between: 0.754 and 0.754	Score:0.206609
+
+10 percent recall score: 0.998577, precision: 0.994
+20 percent recall score: 0.994967, precision: 0.986
+30 percent recall score: 0.989272, precision: 0.971
+40 percent recall score: 0.979187, precision: 0.952
+50 percent recall score: 0.957405, precision: 0.938
+60 percent recall score: 0.914890, precision: 0.913
+70 percent recall score: 0.834937, precision: 0.871
+
+0.0
+Average Precision: 0.736
+
+Recall at first false positive: 0.000
+
+Log average miss rate in [10^-2.5, 10^0]: 1.000
+
+
+Saving: output/lstm_rezoom_2017_04_20_18.32/images_test_boxes_100000/results.png
+
