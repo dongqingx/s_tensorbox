@@ -84,6 +84,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.timeFlag = True
         self.videoSourse = "./data/test.avi"
         self.frame_id = 1
+        self.stop = False
+        self.clear = False
+        self.reset = False
+        self.start = True
 
         self.videoCapture = cv2.VideoCapture("video/test.avi")
         self._timer = QtCore.QTimer(self)
@@ -142,30 +146,36 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         hours = int(daytime.split(':')[0])
         minutes = int(daytime.split(':')[1])
         seconds = int(daytime.split(':')[2])
+
+        if not self.start:
+            return
  
         ret, frame_bgr = self.videoCapture.read() # input size: 480x640
         # cv2.waitKey(500)
-        if not ret:
-            self.videoCapture = cv2.VideoCapture(self.videoSourse)        
+        if not ret or self.reset:
+            self.videoCapture = cv2.VideoCapture(self.videoSourse)
+            self.reset = False 
         if ret == True:
             self.frame_id += 1
-            frame_bgr = numpy.array(frame_bgr)
-            img = imresize(frame_bgr, (self.H["image_height"], self.H["image_width"]), interp='cubic')
-            #img = frame
-            # print 'process begin'
-            feed = {self.x_in: img}
-            (np_pred_boxes, np_pred_confidences) = self.sess.run([self.pred_boxes, self.pred_confidences], feed_dict=feed)
-            new_frame, rects, rect_count = add_rectangles(self.H, [img], np_pred_confidences, np_pred_boxes,
+            if not self.clear:
+                frame_bgr = numpy.array(frame_bgr)
+                img = imresize(frame_bgr, (self.H["image_height"], self.H["image_width"]), interp='cubic')
+                #img = frame
+                # print 'process begin'
+                feed = {self.x_in: img}
+                (np_pred_boxes, np_pred_confidences) = self.sess.run([self.pred_boxes, self.pred_confidences], feed_dict=feed)
+                new_frame, rects, rect_count = add_rectangles(self.H, [img], np_pred_confidences, np_pred_boxes,
                         use_stitching=True, rnn_len=self.H['rnn_len'], min_conf=0.2, tau=0.25, show_suppressed=False)
-            # print 'process end'
-            # end_time = time.time()
-            #print end_time - start_time
-            font=cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_SIMPLEX, 0.8, 0.5, 0, 2, 1)
-            new_frame = cv2.cv.fromarray(new_frame)
-            cv2.cv.PutText(new_frame, "number:  " + str(rect_count), (20,35), font, (255,0,0))
-            cv2.cv.PutText(new_frame, "crowded rate: " + str(float(rect_count)/50.0), (20,60), font, (255,0,0))
-            # print '\nframe: ', self.frame_id
-            frame_bgr = new_frame
+                # print 'process end'
+                # end_time = time.time()
+                #print end_time - start_time
+                font=cv2.cv.InitFont(cv2.cv.CV_FONT_HERSHEY_SIMPLEX, 0.8, 0.5, 0, 2, 1)
+                new_frame = cv2.cv.fromarray(new_frame)
+                cv2.cv.PutText(new_frame, "number:  " + str(rect_count), (20,35), font, (255,0,0))
+                cv2.cv.PutText(new_frame, "crowded rate: " + str(float(rect_count)/50.0), (20,60), font, (255,0,0))
+                # print '\nframe: ', self.frame_id
+                frame_bgr = new_frame
+
             frame_bgr = imresize(frame_bgr, (self.video_output_height, self.video_output_width))
         
             # face detect and align use RGB image
@@ -182,8 +192,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.DetectLabel.setPixmap(img)
             display_frame_rgb = cv2.cvtColor(display_frame, cv2.COLOR_BGR2RGB) # (480,640,3)
 
-def getWeek():
-    localtime = time.localtime()
-    strweek = str(time.strftime('%w',localtime))
-    return strweek
+    
+    def on_stopVideo_clicked(self):
+        self.start = False
 
+    def on_startVideo_clicked(self):
+        self.start = True
+        self.clear = False
+
+    def on_ResetVideo_clicked(self):
+        self.reset = True
+
+    def on_NoDisplay_clicked(self):
+        self.clear = True
