@@ -142,12 +142,15 @@ def gradualBrightness(image, random_times = 2):
 
 
 if __name__ == '__main__':
-    save_dir = "/home/donny/save"
-    image_dir = "/home/donny/test"
+    save_dir = "/home/donny/py_MTCNN_3Point_100_color"
+    image_dir = "/home/face_data/id_2123_cropped_100/aligned/py_MTCNN_3Point_100_color"
     image_list = os.listdir(image_dir)
     for image_file in image_list:
         image_path = image_dir + "/" + image_file
         (shotname, extension) = os.path.splitext(image_file)
+        # if shotname.split("_")[-1] == "0":
+        #    print image_file
+        #    continue
         try:
             image = DataAugmentation.open_image(image_path)
         except IOError:

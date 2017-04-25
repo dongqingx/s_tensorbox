@@ -1,6 +1,8 @@
 """
 For image data augment layer
 
+Revised from CaoChunShui Gait_data_layer.
+
 by Donny You
 
 2016/12/08

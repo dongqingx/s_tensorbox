@@ -128,11 +128,57 @@ cv::Mat ImageAugmentor::ColorJittering(cv::Mat image, bool is_large_scale) {
   return new_image;
 }
 
-cv::Mat ImageAugmentor::AddNoisy(cv::Mat image, bool is_large_scale) {
+double generateGaussianNoise(double mu, double sigma)  
+{  
+    const double epsilon = std::numeric_limits<double>::min(); 
+    static double z0, z1;  
+    static bool flag = false;  
+    flag = !flag;  
+    if (!flag)  
+        return z1*sigma + mu;  
+    double u1, u2;  
+      
+    do  
+    {  
+        u1 = rand()*(1.0 / RAND_MAX);  
+        u2 = rand()*(1.0 / RAND_MAX);  
+    } while (u1 <= epsilon);  
+    z0 = sqrt(-2.0*log(u1))*cos(2 * CV_PI * u2);  
+    z1 = sqrt(-2.0*log(u1))*sin(2 * CV_PI * u2);  
+    return z1*sigma + mu;  
+}
+  
+cv::Mat ImageAugmentor::AddGaussianNoisy(cv::Mat srcImage, bool is_large_scale) {
+    cv::Mat resultImage = srcImage.clone();
+    int channels = resultImage.channels();
+    int nRows = resultImage.rows;
+    int nCols = resultImage.cols*channels;
+    if (resultImage.isContinuous())
+    {  
+        nCols *= nRows;
+        nRows = 1;
+    }
+    for (int i = 0; i < nRows; i++)
+    {
+        for (int j = 0; j < nCols; j++)
+        {
+            int val = resultImage.ptr<uchar>(i)[j] + generateGaussianNoise(2, 0.8) * 32;
+            if (val < 0) 
+                val = 0;
+            if (val > 255) 
+                val = 255;
+            resultImage.ptr<uchar>(i)[j] = (uchar)val;
+        }
+    }
+    return resultImage;
+}
+
+cv::Mat ImageAugmentor::AddPepperSaltNoisy(cv::Mat image, bool is_large_scale) {
   cv::Mat new_image = cv::Mat::zeros(image.size(), image.type());
   int pixel_cnt = image.rows * image.cols;
   int skip_count = 0;
   int rand_skip = rand() % 50;
+  int white_or_black = rand() % 2;
   bool is_checkpoint = false;
 
   for(int y = 0; y < image.rows; y++)
@@ -143,13 +189,14 @@ cv::Mat ImageAugmentor::AddNoisy(cv::Mat image, bool is_large_scale) {
       if(skip_count > rand_skip) {
         is_checkpoint = true;
         rand_skip = rand() % 50;
+        white_or_black = rand() % 2;
         skip_count = 0;
       }
       for(int c = 0; c < 3; c++)
       {
         int pixel = 0;
         if(is_checkpoint) {
-            pixel = 255;
+            pixel = white_or_black == 0? 255:0;
         }
         else {
             pixel = image.at<cv::Vec3b>(y,x)[c];
@@ -165,74 +212,78 @@ cv::Mat ImageAugmentor::AddNoisy(cv::Mat image, bool is_large_scale) {
 
 cv::Mat ImageAugmentor::ScaleUpDown(cv::Mat image, float shrink_ratio_min, 
                                     float shrink_ratio_max, int shrink_method, int enlarge_method) {
-  cv::Mat cv_img = image;
+  cv::Mat cv_img = image.clone();
   cv::Mat shrink_img;
 
-  float shrink_ratio = (rand() / (RAND_MAX + 1.0)) * (shrink_ratio_max - shrink_ratio_min) + shrink_ratio_min;
+  int rand_times = rand() % 5;
 
-  int  origin_width = cv_img.cols, origin_height = cv_img.rows;
-  int shrink_width = round(shrink_ratio * origin_width);
-  int shrink_height = round(shrink_ratio * origin_height);
-  int shrink_interpolation = CV_INTER_LINEAR, enlarge_interpolation = CV_INTER_LINEAR;
-
-  switch(shrink_method) {
-    case 0:
-      shrink_interpolation = CV_INTER_NN;
-      break;
-    case 1:
-      shrink_interpolation = CV_INTER_LINEAR;
-      break;
-    case 2:
-      shrink_interpolation = CV_INTER_CUBIC;
-      break;
-    case 3:
-      shrink_interpolation = CV_INTER_AREA;
-      break;
-    case 4:
-      shrink_interpolation = CV_INTER_LANCZOS4;
-      break;
-    case 5:
-      switch(rand() % 5){
-        case 0 : {shrink_interpolation = CV_INTER_NN; break;}
-        case 1 : {shrink_interpolation = CV_INTER_LINEAR ; break;}
-        case 2 : {shrink_interpolation = CV_INTER_CUBIC  ; break;}
-        case 3 : {shrink_interpolation = CV_INTER_AREA   ; break;}
-        case 4 : {shrink_interpolation = CV_INTER_LANCZOS4; break;}
-        default: break;
+  for(int i = 0; i < rand_times; ++i) {
+    
+      float shrink_ratio = (rand() / (RAND_MAX + 1.0)) * (shrink_ratio_max - shrink_ratio_min) + shrink_ratio_min;
+    
+      int  origin_width = cv_img.cols, origin_height = cv_img.rows;
+      int shrink_width = round(shrink_ratio * origin_width);
+      int shrink_height = round(shrink_ratio * origin_height);
+      int shrink_interpolation = CV_INTER_LINEAR, enlarge_interpolation = CV_INTER_LINEAR;
+    
+      switch(shrink_method) {
+        case 0:
+          shrink_interpolation = CV_INTER_NN;
+          break;
+        case 1:
+          shrink_interpolation = CV_INTER_LINEAR;
+          break;
+        case 2:
+          shrink_interpolation = CV_INTER_CUBIC;
+          break;
+        case 3:
+          shrink_interpolation = CV_INTER_AREA;
+          break;
+        case 4:
+          shrink_interpolation = CV_INTER_LANCZOS4;
+          break;
+        case 5:
+          switch(rand() % 5){
+            case 0 : {shrink_interpolation = CV_INTER_NN; break;}
+            case 1 : {shrink_interpolation = CV_INTER_LINEAR ; break;}
+            case 2 : {shrink_interpolation = CV_INTER_CUBIC  ; break;}
+            case 3 : {shrink_interpolation = CV_INTER_AREA   ; break;}
+            case 4 : {shrink_interpolation = CV_INTER_LANCZOS4; break;}
+            default: break;
+          }
       }
-  }
-
-  cv::resize(cv_img, shrink_img, cv::Size(shrink_width, shrink_height), 0.0, 0.0, shrink_interpolation);
-
-  switch(enlarge_method) {
-    case 0:
-      enlarge_interpolation = CV_INTER_NN;
-      break;
-    case 1:
-      enlarge_interpolation = CV_INTER_LINEAR;
-      break;
-    case 2:
-      enlarge_interpolation = CV_INTER_CUBIC;
-      break;
-    case 3:
-      enlarge_interpolation = CV_INTER_AREA;
-      break;
-    case 4:
-      enlarge_interpolation = CV_INTER_LANCZOS4;
-      break;
-    case 5:
-      switch(rand() % 5){
-        case 0 : {enlarge_interpolation = CV_INTER_NN; break;}
-        case 1 : {enlarge_interpolation = CV_INTER_LINEAR ; break;}
-        case 2 : {enlarge_interpolation = CV_INTER_CUBIC  ; break;}
-        case 3 : {enlarge_interpolation = CV_INTER_AREA   ; break;}
-        case 4 : {enlarge_interpolation = CV_INTER_LANCZOS4; break;}
-        default: break;
+    
+      cv::resize(cv_img, shrink_img, cv::Size(shrink_width, shrink_height), 0.0, 0.0, shrink_interpolation);
+    
+      switch(enlarge_method) {
+        case 0:
+          enlarge_interpolation = CV_INTER_NN;
+          break;
+        case 1:
+          enlarge_interpolation = CV_INTER_LINEAR;
+          break;
+        case 2:
+          enlarge_interpolation = CV_INTER_CUBIC;
+          break;
+        case 3:
+          enlarge_interpolation = CV_INTER_AREA;
+          break;
+        case 4:
+          enlarge_interpolation = CV_INTER_LANCZOS4;
+          break;
+        case 5:
+          switch(rand() % 5){
+            case 0 : {enlarge_interpolation = CV_INTER_NN; break;}
+            case 1 : {enlarge_interpolation = CV_INTER_LINEAR ; break;}
+            case 2 : {enlarge_interpolation = CV_INTER_CUBIC  ; break;}
+            case 3 : {enlarge_interpolation = CV_INTER_AREA   ; break;}
+            case 4 : {enlarge_interpolation = CV_INTER_LANCZOS4; break;}
+            default: break;
+          }
       }
+    
+      cv::resize(shrink_img, cv_img, cv::Size(origin_width, origin_height), 0.0, 0.0, enlarge_interpolation);
   }
-
-  cv::resize(shrink_img, cv_img, cv::Size(origin_width, origin_height), 0.0, 0.0, enlarge_interpolation);
-
   return cv_img;
 }
 
@@ -254,6 +305,12 @@ cv::Mat ImageAugmentor::RotateImage(cv::Mat image, bool is_large_scale) {
   cv::Mat rotate_mat = cv::getRotationMatrix2D(center, rand_angle, shrink_scale);
   cv::warpAffine(image, new_image, rotate_mat, image.size());
 
+  return new_image;
+}
+
+cv::Mat ImageAugmentor::FlipImage(cv::Mat image, int flip_method) {
+  cv::Mat new_image;
+  cv::flip(image, new_image, flip_method);
   return new_image;
 }
 
@@ -284,7 +341,7 @@ std::vector<cv::Mat> ImageAugmentor::RandomAugment(cv::Mat image, float shrink_r
           result_mats.push_back(new_image);
           break;
         case 2:
-          new_image = AddNoisy(image, is_large_scale);
+          new_image = AddPepperSaltNoisy(image, is_large_scale);
           result_mats.push_back(new_image);
           break;
         case 3:
@@ -313,7 +370,7 @@ std::vector<cv::Mat> ImageAugmentor::RandomAugment(cv::Mat image, float shrink_r
       temp_mat = ColorJittering(image, is_large_scale);
       result_mats.push_back(temp_mat);
 
-      temp_mat = AddNoisy(image, is_large_scale);
+      temp_mat = AddPepperSaltNoisy(image, is_large_scale);
       result_mats.push_back(temp_mat);
 
       temp_mat = ScaleUpDown(image, shrink_ratio_min, 

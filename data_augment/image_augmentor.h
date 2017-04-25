@@ -25,7 +25,10 @@ class ImageAugmentor {
     cv::Mat ColorJittering(cv::Mat image, bool is_large_scale = false);
 
     // Add gaussian noisy to images.
-    cv::Mat AddNoisy(cv::Mat image, bool is_large_scale = false);
+    cv::Mat AddGaussianNoisy(cv::Mat image, bool is_large_scale = false);
+
+    // Add pepper salt noisy to images.
+    cv::Mat AddPepperSaltNoisy(cv::Mat image, bool is_large_scale = false);
 
     // Scaling up & down.
     cv::Mat ScaleUpDown(cv::Mat image, float shrink_ratio_min, float shrink_ratio_max, 
@@ -33,6 +36,9 @@ class ImageAugmentor {
 
     // Rotate the image.
     cv::Mat RotateImage(cv::Mat image, bool is_large_scale = false);
+
+    // Flip the image.
+    cv::Mat FlipImage(cv::Mat image, int flip_method);
 
     // Random image augmentation.
     std::vector<cv::Mat> RandomAugment(cv::Mat image, float shrink_ratio_min, float shrink_ratio_max, 

@@ -40,12 +40,19 @@ int main(){
   }
 
   for(int i = 0; i < 10; ++i) {
-    cv::imshow("main", image_augmentor.AddNoisy(mat, false));
+    cv::imshow("main", image_augmentor.AddPepperSaltNoisy(mat, false));
+    cv::waitKey();
+    cv::imshow("main", image_augmentor.AddGaussianNoisy(mat, false));
     cv::waitKey();
   }
 
   for(int i =0; i < 10; ++i) {
     cv::imshow("main", image_augmentor.ScaleUpDown(mat, 0.30, 0.86, 5, 1));
+    cv::waitKey();
+  }
+
+  for(int i = -1; i < 2; ++i) {
+    cv::imshow("main", image_augmentor.FlipImage(mat, i));
     cv::waitKey();
   }
   return 0;
