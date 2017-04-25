@@ -176,7 +176,7 @@ def load_data_gen(H, phase, jitter):
         
         yield output
 
-def add_rectangles(H, orig_image, confidences, boxes, use_stitching=False, rnn_len=1, min_conf=0.1, show_removed=True, tau=0.25, show_suppressed=True):
+def add_rectangles(H, orig_image, confidences, boxes, use_stitching=False, rnn_len=1, min_conf=0.87, show_removed=True, tau=0.25, show_suppressed=True):
     image = np.copy(orig_image[0])
     num_cells = H["grid_height"] * H["grid_width"]
     boxes_r = np.reshape(boxes, (-1,
