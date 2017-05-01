@@ -1,0 +1,172 @@
+x.shape (1, 480, 640, 3)
+x.shape (1, 480, 640, 3)
+next_frame: (300, 832)
+cnn: (2, 15, 20, 832)
+cnn.shape (15, 20, 832, 2)
+cnn: (1, 15, 20, 832)
+0
+25
+50
+75
+100
+125
+150
+175
+200
+225
+250
+275
+300
+325
+Count error: 1.68
+saving:  output/lstm_6lstm_channelconv/save.ckpt-110000.test_boxes.json
+saving:  output/lstm_6lstm_channelconv/save.ckpt-110000.gt_test_boxes.json
+$ ./utils/annolist/doRPC.py --minOverlap 0.500000 output/lstm_6lstm_channelconv/save.ckpt-110000.gt_test_boxes.json output/lstm_6lstm_channelconv/save.ckpt-110000.test_boxes.json
+Minimum width: 0 height: 0
+Asorting too large/ too small detections
+minWidth: 0
+minHeight: 0
+maxWidth:  inf
+maxHeight:  inf
+#Annotations: 6117
+Setting up graphs ...
+missingFrames:  0
+Number of detections on annotated frames:  6982
+Sorting scores ...
+Gradually decrease score ...
+saving:
+/home/donny/Projects/s_tensorbox/output/lstm_6lstm_channelconv/rpc-save.ckpt-110000.test_boxes_overlap0.5.txt
+
+$ ./utils/annolist/plotSimple.py /home/donny/Projects/s_tensorbox/output/lstm_6lstm_channelconv/rpc-save.ckpt-110000.test_boxes_overlap0.5.txt --output output/lstm_6lstm_channelconv/images_test_boxes_110000/results.png
+output results at: Plotting: output/lstm_6lstm_channelconv/rpc-save.ckpt-110000.test_boxes_overlap0.5.txt
+lowest_fppi:  -25.0
+0.990291262136
+1.97579850851
+2.94568757349
+3.90080076631
+4.84203153554
+5.75521561514
+6.61678503164
+90 percent precision score: 0.911293, recall: 0.638
+80 percent precision score: 0.638448, recall: 0.741
+70 percent precision score: 0.005651, recall: 0.756
+
+0.000000 fppi score: inf, recall: 0.000
+0.050000 fppi score: 0.996108, recall: 0.195
+0.100000 fppi score: 0.994300, recall: 0.241
+0.150000 fppi score: 0.992088, recall: 0.288
+0.200000 fppi score: 0.989873, recall: 0.327
+0.250000 fppi score: 0.988227, recall: 0.349
+0.300000 fppi score: 0.984506, recall: 0.393
+0.350000 fppi score: 0.982720, recall: 0.407
+0.400000 fppi score: 0.978495, recall: 0.439
+0.450000 fppi score: 0.974272, recall: 0.465
+0.500000 fppi score: 0.970238, recall: 0.484
+0.550000 fppi score: 0.965444, recall: 0.502
+0.600000 fppi score: 0.962355, recall: 0.514
+0.650000 fppi score: 0.958465, recall: 0.530
+0.700000 fppi score: 0.953847, recall: 0.544
+0.750000 fppi score: 0.951060, recall: 0.553
+0.800000 fppi score: 0.947078, recall: 0.563
+0.850000 fppi score: 0.942691, recall: 0.574
+0.900000 fppi score: 0.939142, recall: 0.582
+0.950000 fppi score: 0.935129, recall: 0.592
+1.000000 fppi score: 0.931070, recall: 0.602
+1.050000 fppi score: 0.927433, recall: 0.610
+1.100000 fppi score: 0.921802, recall: 0.619
+1.150000 fppi score: 0.918295, recall: 0.626
+1.200000 fppi score: 0.914253, recall: 0.634
+1.250000 fppi score: 0.909597, recall: 0.642
+1.300000 fppi score: 0.904853, recall: 0.650
+1.350000 fppi score: 0.902168, recall: 0.655
+1.400000 fppi score: 0.898935, recall: 0.660
+1.450000 fppi score: 0.894216, recall: 0.667
+1.500000 fppi score: 0.890452, recall: 0.671
+1.550000 fppi score: 0.886061, recall: 0.676
+1.600000 fppi score: 0.883564, recall: 0.678
+1.650000 fppi score: 0.880735, recall: 0.680
+1.700000 fppi score: 0.875400, recall: 0.684
+1.750000 fppi score: 0.872535, recall: 0.687
+1.800000 fppi score: 0.868750, recall: 0.690
+1.850000 fppi score: 0.864272, recall: 0.694
+1.900000 fppi score: 0.859913, recall: 0.698
+1.950000 fppi score: 0.857367, recall: 0.699
+2.000000 fppi score: 0.853228, recall: 0.702
+2.050000 fppi score: 0.848688, recall: 0.705
+2.100000 fppi score: 0.845108, recall: 0.706
+2.150000 fppi score: 0.841554, recall: 0.709
+2.200000 fppi score: 0.838138, recall: 0.711
+2.250000 fppi score: 0.832245, recall: 0.714
+2.300000 fppi score: 0.827468, recall: 0.716
+2.350000 fppi score: 0.823456, recall: 0.718
+2.400000 fppi score: 0.819758, recall: 0.720
+2.450000 fppi score: 0.815399, recall: 0.722
+2.500000 fppi score: 0.809564, recall: 0.727
+2.550000 fppi score: 0.805295, recall: 0.729
+2.600000 fppi score: 0.795119, recall: 0.731
+2.650000 fppi score: 0.786988, recall: 0.733
+2.700000 fppi score: 0.774792, recall: 0.734
+2.750000 fppi score: 0.767383, recall: 0.735
+2.800000 fppi score: 0.755185, recall: 0.736
+2.850000 fppi score: 0.739653, recall: 0.737
+2.900000 fppi score: 0.734266, recall: 0.737
+2.950000 fppi score: 0.720366, recall: 0.738
+3.000000 fppi score: 0.713434, recall: 0.738
+3.050000 fppi score: 0.705240, recall: 0.739
+3.100000 fppi score: 0.685947, recall: 0.740
+3.150000 fppi score: 0.679074, recall: 0.740
+3.200000 fppi score: 0.656192, recall: 0.740
+3.250000 fppi score: 0.638448, recall: 0.741
+3.300000 fppi score: 0.620213, recall: 0.741
+3.350000 fppi score: 0.615157, recall: 0.742
+3.400000 fppi score: 0.592604, recall: 0.742
+3.450000 fppi score: 0.556859, recall: 0.743
+3.550000 fppi score: 0.540082, recall: 0.744
+3.600000 fppi score: 0.504299, recall: 0.744
+3.650000 fppi score: 0.476908, recall: 0.744
+3.700000 fppi score: 0.441768, recall: 0.745
+3.750000 fppi score: 0.405189, recall: 0.745
+3.800000 fppi score: 0.387021, recall: 0.746
+3.850000 fppi score: 0.349531, recall: 0.746
+3.900000 fppi score: 0.321063, recall: 0.747
+3.950000 fppi score: 0.298715, recall: 0.747
+4.000000 fppi score: 0.265000, recall: 0.748
+4.100000 fppi score: 0.246363, recall: 0.748
+4.150000 fppi score: 0.211060, recall: 0.749
+4.200000 fppi score: 0.192021, recall: 0.749
+4.250000 fppi score: 0.184609, recall: 0.749
+4.300000 fppi score: 0.152048, recall: 0.750
+4.350000 fppi score: 0.133313, recall: 0.750
+4.400000 fppi score: 0.122138, recall: 0.750
+4.450000 fppi score: 0.104634, recall: 0.750
+4.500000 fppi score: 0.094553, recall: 0.750
+4.550000 fppi score: 0.085709, recall: 0.751
+4.600000 fppi score: 0.074759, recall: 0.751
+4.650000 fppi score: 0.067652, recall: 0.751
+4.700000 fppi score: 0.058840, recall: 0.751
+4.750000 fppi score: 0.052998, recall: 0.751
+4.800000 fppi score: 0.044442, recall: 0.752
+4.850000 fppi score: 0.039940, recall: 0.752
+4.900000 fppi score: 0.033923, recall: 0.752
+4.950000 fppi score: 0.030537, recall: 0.753
+
+EER between: 0.750 and 0.750	Score:0.122138
+
+10 percent recall score: 0.998897, precision: 0.990
+20 percent recall score: 0.995944, precision: 0.986
+30 percent recall score: 0.991557, precision: 0.970
+40 percent recall score: 0.983604, precision: 0.955
+50 percent recall score: 0.966245, precision: 0.941
+60 percent recall score: 0.931632, precision: 0.913
+70 percent recall score: 0.856570, precision: 0.862
+
+0.0
+Average Precision: 0.735
+
+Recall at first false positive: 0.000
+
+Log average miss rate in [10^-2.5, 10^0]: 1.000
+
+
+Saving: output/lstm_6lstm_channelconv/images_test_boxes_110000/results.png
+
