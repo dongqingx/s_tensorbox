@@ -17,7 +17,7 @@ cv::Mat ImageAugmentor::SimulateIllumination(cv::Mat image, int direction, bool 
   double bright_factor = 0.0;
   if(!is_large_scale)
   {
-    bright_factor = (rand() % 10 + 5.0) / 10.0;
+    bright_factor = (rand() % 10 + 8.0) / 10.0;
   }
   else
   {
@@ -31,12 +31,13 @@ cv::Mat ImageAugmentor::SimulateIllumination(cv::Mat image, int direction, bool 
   // cv::Mat new_image(width, height, CV_8UC3, cv::Scalar(0,0,0));
 
   double alpha = 0.0;
+  double offset = (rand() % 30) / 30.0;
 
   switch(direction){
     case 0:
       for(int i = 0; i < width; ++i)
       {
-        alpha = ((width - 2.0 * i) / (width * 1.0)) * bright_factor;
+        alpha = MAX(((width - 2.0 * i) / (width * 1.0)) * bright_factor, -0.25) + offset;
         // cout << "alpha: " << alpha << endl;
         for(int j = 0; j < height; ++j)
         {
@@ -51,7 +52,7 @@ cv::Mat ImageAugmentor::SimulateIllumination(cv::Mat image, int direction, bool 
     case 1:
       for(int i = 0; i < width; ++i)
       {
-        alpha = ((width - 2.0 * i) / (width * 1.0)) * bright_factor;
+        alpha = MIN(((width - 2.0 * i) / (width * 1.0)) * bright_factor, 0.25) - offset;
         // cout << "alpha: " << alpha << endl;
         for(int j = 0; j < height; ++j)
         {
@@ -67,7 +68,7 @@ cv::Mat ImageAugmentor::SimulateIllumination(cv::Mat image, int direction, bool 
     case 2:
       for(int i = 0; i < height; ++i)
       {
-        alpha = ((height - 2.0 * i) / (height * 1.0)) * bright_factor;
+        alpha = MAX(((height - 2.0 * i) / (height * 1.0)) * bright_factor, -0.25) + offset;
         // cout << "alpha: " << alpha << endl;
         for(int j = 0; j < width; ++j)
         {
@@ -83,7 +84,7 @@ cv::Mat ImageAugmentor::SimulateIllumination(cv::Mat image, int direction, bool 
     case 3:
       for(int i = 0; i < height; ++i)
       {
-        alpha = ((height - 2.0 * i) / (height * 1.0)) * bright_factor;
+        alpha = MIN(((height - 2.0 * i) / (height * 1.0)) * bright_factor, 0.25) - offset;
         // cout << "alpha: " << alpha << endl;
         for(int j = 0; j < width; ++j)
         {
@@ -162,7 +163,7 @@ cv::Mat ImageAugmentor::AddGaussianNoisy(cv::Mat srcImage, bool is_large_scale) 
     {
         for (int j = 0; j < nCols; j++)
         {
-            int val = resultImage.ptr<uchar>(i)[j] + generateGaussianNoise(2, 0.8) * 32;
+            int val = resultImage.ptr<uchar>(i)[j] + generateGaussianNoise(2, 0.8) * 32 * 0.5;
             if (val < 0) 
                 val = 0;
             if (val > 255) 
@@ -177,7 +178,7 @@ cv::Mat ImageAugmentor::AddPepperSaltNoisy(cv::Mat image, bool is_large_scale) {
   cv::Mat new_image = cv::Mat::zeros(image.size(), image.type());
   int pixel_cnt = image.rows * image.cols;
   int skip_count = 0;
-  int rand_skip = rand() % 50;
+  int rand_skip = rand() % 80;
   int white_or_black = rand() % 2;
   bool is_checkpoint = false;
 
@@ -188,7 +189,7 @@ cv::Mat ImageAugmentor::AddPepperSaltNoisy(cv::Mat image, bool is_large_scale) {
       skip_count ++;
       if(skip_count > rand_skip) {
         is_checkpoint = true;
-        rand_skip = rand() % 50;
+        rand_skip = rand() % 80;
         white_or_black = rand() % 2;
         skip_count = 0;
       }
