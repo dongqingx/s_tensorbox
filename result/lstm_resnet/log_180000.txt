@@ -1,0 +1,282 @@
+x.shape (1, 480, 640, 3)
+x.shape (1, 480, 640, 3)
+('resnet_v1_101/block1/unit_2/bottleneck_v1', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(256)]))
+('resnet_v1_101/block2/unit_2/bottleneck_v1', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(512)]))
+('resnet_v1_101/block3/unit_4/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_1/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_1/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_1/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_22/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block1/unit_1/bottleneck_v1/shortcut', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(256)]))
+('resnet_v1_101/block3/unit_22/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_5/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/logits', TensorShape([Dimension(1), Dimension(1), Dimension(1), Dimension(1000)]))
+('resnet_v1_101/block3/unit_8/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_19/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_8/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_8/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block2/unit_4/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(128)]))
+('resnet_v1_101/block2/unit_4/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(512)]))
+('resnet_v1_101/block3/unit_15/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block2/unit_4/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(128)]))
+('resnet_v1_101/block3/unit_11/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_11/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_22/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_11/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_19/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/conv1', TensorShape([Dimension(1), Dimension(240), Dimension(320), Dimension(64)]))
+('resnet_v1_101/block3/unit_14/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block1/unit_1/bottleneck_v1', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(256)]))
+('resnet_v1_101/block1/unit_1/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(64)]))
+('resnet_v1_101/block1/unit_1/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(256)]))
+('resnet_v1_101/block1/unit_1/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(64)]))
+('resnet_v1_101/block3/unit_8/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_15/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_15/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_12/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_12/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_12/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block4/unit_1/bottleneck_v1/shortcut', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(2048)]))
+('resnet_v1_101/block3/unit_14/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_14/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_14/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_21/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block4/unit_1/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(2048)]))
+('resnet_v1_101/block3/unit_20/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_20/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_20/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_6/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_6/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_6/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block4/unit_2/bottleneck_v1', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(2048)]))
+('resnet_v1_101/block3/unit_19/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_16/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_1/bottleneck_v1/shortcut', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_16/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_9/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_9/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_9/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_16/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_7/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block2/unit_3/bottleneck_v1', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(512)]))
+('resnet_v1_101/block3/unit_10/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_18/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_12/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_13/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_23/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(1024)]))
+('resnet_v1_101/block4/unit_2/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(2048)]))
+('resnet_v1_101/block3/unit_3/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block2/unit_1/bottleneck_v1', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(512)]))
+('resnet_v1_101/block2/unit_2/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(128)]))
+('resnet_v1_101/block2/unit_2/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(128)]))
+('resnet_v1_101/block2/unit_2/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(512)]))
+('predictions', TensorShape([Dimension(1), Dimension(1), Dimension(1), Dimension(1000)]))
+('resnet_v1_101/block3/unit_1/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block1/unit_2/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(64)]))
+('resnet_v1_101/block1/unit_2/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(256)]))
+('resnet_v1_101/block1/unit_2/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(64)]))
+('resnet_v1_101/block2/unit_1/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(512)]))
+('resnet_v1_101/block2/unit_1/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(128)]))
+('resnet_v1_101/block2/unit_1/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(128)]))
+('resnet_v1_101/block3/unit_11/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block4/unit_1/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(512)]))
+('resnet_v1_101/block3/unit_22/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_19/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_17/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_17/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_17/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(512)]))
+('resnet_v1_101/block4/unit_2/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(512)]))
+('resnet_v1_101/block3/unit_9/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(1024)]))
+('resnet_v1_101/block3/unit_3/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_3/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_21/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_3/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_7/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_7/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_7/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block2/unit_3/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(128)]))
+('resnet_v1_101/block2/unit_3/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(512)]))
+('resnet_v1_101/block2/unit_3/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(128)]))
+('resnet_v1_101/block1/unit_3/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(120), Dimension(160), Dimension(64)]))
+('resnet_v1_101/block1/unit_3/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(64)]))
+('resnet_v1_101/block1/unit_3/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(256)]))
+('resnet_v1_101/block3/unit_17/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block2/unit_1/bottleneck_v1/shortcut', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(512)]))
+('resnet_v1_101/block3/unit_5/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_5/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_5/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_18/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_18/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_18/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block4/unit_1/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(512)]))
+('resnet_v1_101/block4/unit_1/bottleneck_v1', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(2048)]))
+('resnet_v1_101/block3/unit_6/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_2/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_2/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_2/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_16/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_21/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_15/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block4/unit_2/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(512)]))
+('resnet_v1_101/block4/unit_3/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(2048)]))
+('resnet_v1_101/block4/unit_3/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(512)]))
+('resnet_v1_101/block4/unit_3/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(512)]))
+('resnet_v1_101/block3/unit_13/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_13/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_13/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_21/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_4/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_4/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_4/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_23/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_2/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_23/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(256)]))
+('resnet_v1_101/block4', TensorShape([Dimension(1), Dimension(15), Dimension(20), Dimension(2048)]))
+('resnet_v1_101/block3/unit_10/bottleneck_v1/conv3', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+('resnet_v1_101/block3/unit_10/bottleneck_v1/conv2', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block3/unit_10/bottleneck_v1/conv1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(256)]))
+('resnet_v1_101/block1', TensorShape([Dimension(1), Dimension(60), Dimension(80), Dimension(256)]))
+('resnet_v1_101/block3/unit_20/bottleneck_v1', TensorShape([Dimension(1), Dimension(30), Dimension(40), Dimension(1024)]))
+0
+25
+50
+75
+100
+125
+150
+175
+200
+225
+250
+275
+300
+325
+Count error: 1.56857142857
+saving:  output/lstm_resnet/save.ckpt-180000.test_boxes.json
+saving:  output/lstm_resnet/save.ckpt-180000.gt_test_boxes.json
+$ ./utils/annolist/doRPC.py --minOverlap 0.500000 output/lstm_resnet/save.ckpt-180000.gt_test_boxes.json output/lstm_resnet/save.ckpt-180000.test_boxes.json
+Minimum width: 0 height: 0
+Asorting too large/ too small detections
+minWidth: 0
+minHeight: 0
+maxWidth:  inf
+maxHeight:  inf
+#Annotations: 6117
+Setting up graphs ...
+missingFrames:  0
+Number of detections on annotated frames:  6326
+Sorting scores ...
+Gradually decrease score ...
+saving:
+/home/donny/Projects/s_tensorbox/output/lstm_resnet/rpc-save.ckpt-180000.test_boxes_overlap0.5.txt
+
+$ ./utils/annolist/plotSimple.py /home/donny/Projects/s_tensorbox/output/lstm_resnet/rpc-save.ckpt-180000.test_boxes_overlap0.5.txt --output output/lstm_resnet/images_test_boxes_180000/results.png
+output results at: Plotting: output/lstm_resnet/rpc-save.ckpt-180000.test_boxes_overlap0.5.txt
+lowest_fppi:  -25.0
+0.985507246377
+1.96236279307
+2.92563666505
+3.8841168844
+4.84035320825
+5.78624344273
+6.71068213012
+7.59936925559
+90 percent precision score: 0.869001, recall: 0.778
+80 percent precision score: 0.001642, recall: 0.821
+
+0.000000 fppi score: inf, recall: 0.000
+0.050000 fppi score: 0.999047, recall: 0.159
+0.100000 fppi score: 0.998362, recall: 0.217
+0.150000 fppi score: 0.997887, recall: 0.252
+0.200000 fppi score: 0.996899, recall: 0.302
+0.250000 fppi score: 0.995375, recall: 0.354
+0.300000 fppi score: 0.993666, recall: 0.396
+0.350000 fppi score: 0.990087, recall: 0.460
+0.400000 fppi score: 0.987059, recall: 0.501
+0.450000 fppi score: 0.982756, recall: 0.539
+0.500000 fppi score: 0.979792, recall: 0.563
+0.550000 fppi score: 0.977068, recall: 0.581
+0.600000 fppi score: 0.972604, recall: 0.603
+0.650000 fppi score: 0.969690, recall: 0.615
+0.700000 fppi score: 0.965424, recall: 0.629
+0.750000 fppi score: 0.961352, recall: 0.641
+0.800000 fppi score: 0.956672, recall: 0.655
+0.850000 fppi score: 0.952479, recall: 0.664
+0.900000 fppi score: 0.947872, recall: 0.676
+0.950000 fppi score: 0.940832, recall: 0.691
+1.000000 fppi score: 0.936017, recall: 0.700
+1.050000 fppi score: 0.931697, recall: 0.707
+1.100000 fppi score: 0.922951, recall: 0.722
+1.150000 fppi score: 0.916952, recall: 0.732
+1.200000 fppi score: 0.908559, recall: 0.744
+1.250000 fppi score: 0.901972, recall: 0.752
+1.300000 fppi score: 0.895185, recall: 0.758
+1.350000 fppi score: 0.886223, recall: 0.765
+1.400000 fppi score: 0.881255, recall: 0.769
+1.450000 fppi score: 0.877060, recall: 0.773
+1.500000 fppi score: 0.869001, recall: 0.778
+1.550000 fppi score: 0.863367, recall: 0.781
+1.600000 fppi score: 0.856128, recall: 0.786
+1.650000 fppi score: 0.847929, recall: 0.790
+1.700000 fppi score: 0.836969, recall: 0.796
+1.750000 fppi score: 0.829728, recall: 0.800
+1.800000 fppi score: 0.821408, recall: 0.803
+1.850000 fppi score: 0.809006, recall: 0.807
+1.900000 fppi score: 0.800730, recall: 0.809
+1.950000 fppi score: 0.783105, recall: 0.810
+2.000000 fppi score: 0.761933, recall: 0.811
+2.050000 fppi score: 0.739514, recall: 0.811
+2.100000 fppi score: 0.705641, recall: 0.812
+2.150000 fppi score: 0.695290, recall: 0.812
+2.200000 fppi score: 0.639325, recall: 0.813
+2.250000 fppi score: 0.538515, recall: 0.813
+2.300000 fppi score: 0.515405, recall: 0.814
+2.350000 fppi score: 0.434100, recall: 0.814
+2.400000 fppi score: 0.314845, recall: 0.815
+2.450000 fppi score: 0.282673, recall: 0.815
+2.500000 fppi score: 0.195453, recall: 0.815
+2.550000 fppi score: 0.174564, recall: 0.816
+2.600000 fppi score: 0.132471, recall: 0.816
+2.650000 fppi score: 0.102720, recall: 0.817
+2.700000 fppi score: 0.063523, recall: 0.817
+2.750000 fppi score: 0.062309, recall: 0.817
+2.800000 fppi score: 0.049376, recall: 0.817
+2.850000 fppi score: 0.039158, recall: 0.818
+2.900000 fppi score: 0.027814, recall: 0.818
+2.950000 fppi score: 0.023585, recall: 0.819
+3.000000 fppi score: 0.014671, recall: 0.819
+3.100000 fppi score: 0.011370, recall: 0.820
+3.150000 fppi score: 0.007197, recall: 0.820
+3.250000 fppi score: 0.006430, recall: 0.820
+3.300000 fppi score: 0.004615, recall: 0.820
+3.350000 fppi score: 0.003166, recall: 0.821
+3.400000 fppi score: 0.003087, recall: 0.821
+3.450000 fppi score: 0.002013, recall: 0.821
+3.550000 fppi score: 0.001738, recall: 0.821
+3.600000 fppi score: 0.001443, recall: 0.822
+3.650000 fppi score: 0.001206, recall: 0.822
+3.700000 fppi score: 0.001014, recall: 0.822
+
+EER between: 0.820 and 0.820	Score:0.007197
+
+10 percent recall score: 0.999593, precision: 0.986
+20 percent recall score: 0.998579, precision: 0.977
+30 percent recall score: 0.996971, precision: 0.963
+40 percent recall score: 0.993451, precision: 0.958
+50 percent recall score: 0.987112, precision: 0.956
+60 percent recall score: 0.973286, precision: 0.946
+70 percent recall score: 0.936044, precision: 0.924
+80 percent recall score: 0.829329, precision: 0.889
+
+0.0
+Average Precision: 0.844
+
+Recall at first false positive: 0.000
+
+Log average miss rate in [10^-2.5, 10^0]: 1.000
+
+
+Saving: output/lstm_resnet/images_test_boxes_180000/results.png
+
